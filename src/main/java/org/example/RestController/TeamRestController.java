@@ -37,4 +37,19 @@ public class TeamRestController {
     public Team updateTeam(@PathVariable int id, @RequestBody Team team) {
         return teamIService.updateTeam(id, team);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteTeam(@PathVariable int id) {
+        teamIService.deleteTeam(id);
+    }
+
+    @PostMapping("/{teamId}/add-user/{userId}")
+    public Team addUserToTeam(@PathVariable int teamId, @PathVariable int userId) {
+        return teamIService.addUserToTeam(teamId, userId);
+    }
+
+    @PostMapping("/{teamId}/remove-user/{userId}")
+    public Team removeUserFromTeam(@PathVariable int teamId, @PathVariable int userId) {
+        return teamIService.removeUserFromTeam(teamId, userId);
+    }
 }

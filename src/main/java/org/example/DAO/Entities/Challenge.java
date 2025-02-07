@@ -19,7 +19,7 @@ public class Challenge {
      String title;
      String description;
      int difficultyLevel;
-     int score;
+     int score_c;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

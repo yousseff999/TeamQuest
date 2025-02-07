@@ -9,4 +9,7 @@ public interface TeamIService {
     public Team getTeamById(int id);
     public List<Team> getAllTeams();
     public Team updateTeam(int id, Team team);
+    public void deleteTeam(int id);
+    public Team addUserToTeam(int teamId, int userId);
+    public Team removeUserFromTeam(int teamId, int userId);
 }

@@ -71,4 +71,6 @@ public class UserService implements UserIService{
     public long countUsersByRole(Role role) {
         return userRepository.countByRole(role);
     }
+
+
 }

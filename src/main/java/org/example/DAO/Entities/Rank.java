@@ -21,4 +21,27 @@ public class Rank {
      LocalDate date;
     @Enumerated(EnumType.STRING)
     RankType rankType;
+    int score;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    Team team;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")  // Add this field
+    private Department department;
+
+    @PrePersist
+    public void validate() {
+        if (user == null && team == null && this.department == null) {
+            throw new IllegalStateException("Rank must be linked to a User or Team");
+        }
+        if (user != null && team != null && department != null) {
+            throw new IllegalStateException("Rank cannot be linked to both User and Team");
+        }
+    }
 }

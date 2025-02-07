@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 import org.example.DAO.ENUM.Role;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public class User {
          String username;
          String email;
          String password;
-         int totalScore;
+         int score_u;
         @Enumerated(EnumType.STRING)
         Role role;
       @ManyToMany(mappedBy = "participants")
@@ -31,6 +32,13 @@ public class User {
       @ManyToOne
       @JoinColumn(name = "team_id")
       Team team;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+     List<Rank> ranks = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+
 
 
 }

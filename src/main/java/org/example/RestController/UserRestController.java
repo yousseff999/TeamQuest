@@ -55,4 +55,6 @@ public class UserRestController {
     public long countUsersByRole(@RequestParam Role role) {
         return userIService.countUsersByRole(role);
     }
+
+
 }
