@@ -105,4 +105,43 @@ public class RankService implements RankIService{
         }
         rankRepository.deleteById(rankId);
     }
+
+    public void updateRank(Integer entityId, RankType rankType) {
+        // Variable to hold the score to be used for rank
+        int score = 0;
+
+        // Retrieve the score based on the rankType
+        switch (rankType) {
+            case INDIVIDUAL:
+                // Get the score from User table
+                User user = userRepository.findById(entityId)
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+                score = user.getScore_u();  // Assuming 'score_u' holds the user's score
+                break;
+            case TEAM:
+                // Get the score from Team table
+                Team team = teamRepository.findById(entityId)
+                        .orElseThrow(() -> new RuntimeException("Team not found"));
+                score = team.getScore_t();  // Assuming 'score_t' holds the team's score
+                break;
+            case DEPARTMENT:
+                // Get the score from Department table
+                Department department = departmentRepository.findById(entityId)
+                        .orElseThrow(() -> new RuntimeException("Department not found"));
+                score = department.getScore_d();  // Assuming 'score_d' holds the department's score
+                break;
+            default:
+                throw new RuntimeException("Invalid RankType");
+        }
+
+        // Fetch the existing Rank or create a new one if not found
+        Rank rank = rankRepository.findByRankTypeAndId(rankType, entityId)
+                .orElse(new Rank(entityId, LocalDate.now(), rankType, 0)); // Create a new rank if not found
+
+        // Update the rank's score
+        rank.setScore(score);
+
+        // Save the updated Rank
+        rankRepository.save(rank);
+    }
 }

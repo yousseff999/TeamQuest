@@ -1,5 +1,6 @@
 package org.example.Services;
 
+import org.example.DAO.ENUM.RankType;
 import org.example.DAO.Entities.Rank;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface RankIService {
     public List<Rank> getTeamRanks();
     public void deleteRank(int rankId);
     public Rank updateDepartmentRank(int departmentId);
+    public void updateRank(Integer entityId, RankType rankType);
 }

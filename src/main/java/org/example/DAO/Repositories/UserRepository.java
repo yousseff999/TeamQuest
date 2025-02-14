@@ -18,6 +18,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Override
     List<User> findAll();
+     List <User> findUsersById(int id);
     List<User> findByRole(Role role);
     List<User> findByUsernameContainingIgnoreCaseOrEmailContainingIgnoreCase(String username, String email);
     long countByRole(Role role);

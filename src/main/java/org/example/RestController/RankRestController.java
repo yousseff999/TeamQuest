@@ -1,6 +1,7 @@
 package org.example.RestController;
 
 import lombok.AllArgsConstructor;
+import org.example.DAO.ENUM.RankType;
 import org.example.DAO.Entities.Rank;
 import org.example.Services.RankIService;
 import org.springframework.context.annotation.Configuration;
@@ -53,4 +54,10 @@ public class RankRestController {
         return ResponseEntity.ok("Rank deleted successfully!");
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<String> updateRank(@RequestParam Integer entityId, @RequestParam RankType rankType) {
+        // Update the rank based on userId, teamId, or departmentId and rankType
+        rankIService.updateRank(entityId, rankType);
+        return ResponseEntity.ok("Rank updated successfully.");
+    }
 }

@@ -44,4 +44,10 @@ public class Rank {
             throw new IllegalStateException("Rank cannot be linked to both User and Team");
         }
     }
+    public Rank(Integer id, LocalDate date, RankType rankType, int score) {
+        this.id = id;
+        this.date = date;
+        this.rankType = rankType;
+        this.score = score;
+    }
 }

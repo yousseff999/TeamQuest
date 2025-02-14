@@ -19,10 +19,13 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     int id;
-     String title;
-     LocalDate start_date;
-     LocalDate end_date;
+     int eventId;
+     String eventName;
+     String description;
+     LocalDate startDate;
+     LocalDate endDate;
+     String location;
+     String eventImage;
     @Enumerated(EnumType.STRING)
     TypeEvent eventType;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)

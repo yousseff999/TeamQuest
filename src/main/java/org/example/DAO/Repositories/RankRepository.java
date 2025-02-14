@@ -13,4 +13,5 @@ public interface RankRepository extends JpaRepository<Rank,Integer> {
     Optional<Rank> findByTeam(Team team);
     List<Rank> findByRankType(RankType rankType);
     Optional<Rank> findByDepartment(Department department);
+    Optional<Rank> findByRankTypeAndId(RankType rankType, Integer id);
 }
