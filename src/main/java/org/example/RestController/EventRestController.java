@@ -1,6 +1,7 @@
 package org.example.RestController;
 
 import lombok.AllArgsConstructor;
+import org.example.DAO.ENUM.TypeEvent;
 import org.example.DAO.Entities.Event;
 import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.EventRepository;
@@ -39,6 +40,11 @@ public class EventRestController {
     public ResponseEntity<String> deleteEvent(@PathVariable int eventId) {
         eventIService.deleteEvent(eventId);
         return ResponseEntity.ok("Event deleted successfully.");
+    }
+
+    @GetMapping("/category/{category}")
+    public List<Event> getEventsByCategory(@PathVariable TypeEvent category) {
+        return eventIService.showEventsByCategory(category);
     }
 
     @GetMapping("/getevent/{eventId}")

@@ -1,5 +1,6 @@
 package org.example.Services;
 
+import org.example.DAO.ENUM.TypeEvent;
 import org.example.DAO.Entities.Event;
 import org.example.DAO.Entities.User;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,4 +17,5 @@ public interface EventIService {
     public List<User> showEventUsers(int eventId);
     public Event updateEventImage(int eventId, MultipartFile eventImage);
     public String getImageUrlForEventByID(int idEvent);
+    public List<Event> showEventsByCategory(TypeEvent category);
 }

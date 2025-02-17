@@ -6,6 +6,9 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -17,12 +20,23 @@ import java.time.LocalDate;
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     int id;
-     String title;
+     int activityID;
+     String activityName;
      String description;
-     LocalDate date;
-     String location;
+     LocalDate startDate;
+     LocalDate endDate;
+     int currentParticipants;
+     String activityImage;
+     int maxParticipants;
+     String status;
     @ManyToOne
     @JoinColumn(name = "event_id")
      Event event;
+    @ManyToMany
+    @JoinTable(
+            name = "activity_participants",
+            joinColumns = @JoinColumn(name = "activity_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> users;
 }

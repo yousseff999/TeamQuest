@@ -38,4 +38,6 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
      List<User> participants;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    List<Activity> activities;
 }

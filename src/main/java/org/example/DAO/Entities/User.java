@@ -7,6 +7,7 @@ import org.example.DAO.ENUM.Role;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -37,6 +38,8 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+    @ManyToMany(mappedBy = "users") // This must match the field in Activity
+    private Set<Activity> activities;
 
 
 

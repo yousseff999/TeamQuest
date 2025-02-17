@@ -2,6 +2,7 @@ package org.example.Services;
 
 import antlr.Utils;
 import lombok.AllArgsConstructor;
+import org.example.DAO.ENUM.TypeEvent;
 import org.example.DAO.Entities.Event;
 import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.EventRepository;
@@ -59,6 +60,10 @@ public class EventService implements EventIService{
     public Event getEventById(int eventId) {
         return eventRepository.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found with ID: " + eventId));
+    }
+
+    public List<Event> showEventsByCategory(TypeEvent category) {
+        return eventRepository.findByEventType(category);
     }
 
     public List<Event> getAllEvents() {
