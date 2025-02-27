@@ -2,6 +2,8 @@ package org.example.Services;
 
 import org.example.DAO.ENUM.Role;
 import org.example.DAO.Entities.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
@@ -15,4 +17,6 @@ public interface UserIService {
     public List<User> getUsersByRole(Role role);
     public List<User> searchUsers(String query);
     public long countUsersByRole(Role role);
+
+    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }

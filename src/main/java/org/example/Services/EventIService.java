@@ -1,7 +1,9 @@
 package org.example.Services;
 
+import org.example.DAO.ENUM.InteractionType;
 import org.example.DAO.ENUM.TypeEvent;
 import org.example.DAO.Entities.Event;
+import org.example.DAO.Entities.EventInteraction;
 import org.example.DAO.Entities.User;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,4 +20,7 @@ public interface EventIService {
     public Event updateEventImage(int eventId, MultipartFile eventImage);
     public String getImageUrlForEventByID(int idEvent);
     public List<Event> showEventsByCategory(TypeEvent category);
+    public void recordInteraction(int userId, int eventId, InteractionType interactionType);
+    public List<EventInteraction> getUserInteractions(int userId);
+    public List<EventInteraction> getEventInteractions(int eventId);
 }

@@ -1,8 +1,10 @@
 package org.example.RestController;
 
 import lombok.AllArgsConstructor;
+import org.example.DAO.ENUM.InteractionType;
 import org.example.DAO.ENUM.TypeEvent;
 import org.example.DAO.Entities.Event;
+import org.example.DAO.Entities.EventInteraction;
 import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.EventRepository;
 import org.example.Services.EventIService;
@@ -83,5 +85,23 @@ public class EventRestController {
     public ResponseEntity<String> getImageUrlForEvent(@PathVariable int idEvent) {
         String imageUrl = eventIService.getImageUrlForEventByID(idEvent);
         return ResponseEntity.ok(imageUrl);
+    }
+
+    @PostMapping("/{eventId}/interact")
+    public ResponseEntity<String> recordInteraction(
+            @RequestParam int userId,
+            @PathVariable int eventId,
+            @RequestParam InteractionType interactionType) {
+        eventIService.recordInteraction(userId, eventId, interactionType);
+        return ResponseEntity.ok("Interaction enregistrée avec succès");
+    }
+
+    @GetMapping("/user/{userId}/interactions")
+    public ResponseEntity<List<EventInteraction>> getUserInteractions(@PathVariable int userId) {
+        return ResponseEntity.ok(eventIService.getUserInteractions(userId));
+    }
+    @GetMapping("/{eventId}/interactions")
+    public ResponseEntity<List<EventInteraction>> getEventInteractions(@PathVariable int eventId) {
+        return ResponseEntity.ok(eventIService.getEventInteractions(eventId));
     }
 }

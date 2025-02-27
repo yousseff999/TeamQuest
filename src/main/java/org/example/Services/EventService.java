@@ -2,9 +2,12 @@ package org.example.Services;
 
 import antlr.Utils;
 import lombok.AllArgsConstructor;
+import org.example.DAO.ENUM.InteractionType;
 import org.example.DAO.ENUM.TypeEvent;
 import org.example.DAO.Entities.Event;
+import org.example.DAO.Entities.EventInteraction;
 import org.example.DAO.Entities.User;
+import org.example.DAO.Repositories.EventInteractionRepository;
 import org.example.DAO.Repositories.EventRepository;
 import org.example.DAO.Repositories.UserRepository;
 import org.springframework.core.env.Environment;
@@ -16,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +29,7 @@ import java.util.UUID;
 public class EventService implements EventIService{
     EventRepository eventRepository;
     UserRepository userRepository;
+    EventInteractionRepository eventInteractionRepository;
     Environment environment;
 
 
@@ -137,4 +142,27 @@ public class EventService implements EventIService{
         return (eventImage != null && !eventImage.isEmpty()) ? baseUrl + eventImage : null;
     }
 
+    public void recordInteraction(int userId, int eventId, InteractionType interactionType) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found with ID: " + eventId));
+
+        EventInteraction interaction = EventInteraction.builder()
+                .user(user)
+                .event(event)
+                .interactionType(interactionType)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        eventInteractionRepository.save(interaction);
+    }
+
+    public List<EventInteraction> getUserInteractions(int userId) {
+        return eventInteractionRepository.findByUserId(userId);
+    }
+    public List<EventInteraction> getEventInteractions(int eventId) {
+        return eventInteractionRepository.findByEventEventId(eventId);
+    }
 }
