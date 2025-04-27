@@ -36,6 +36,8 @@ public class TeamService implements TeamIService{
                 .orElseThrow(() -> new RuntimeException("Team not found"));
 
         existingTeam.setName(team.getName());
+        existingTeam.setDescription(team.getDescription());
+        existingTeam.setCreationDate(team.getCreationDate());
         existingTeam.setScore_t(team.getScore_t());
         existingTeam.setMembers(team.getMembers());
 
@@ -74,4 +76,6 @@ public class TeamService implements TeamIService{
 
         return teamRepository.save(team); // Save the updated team
     }
+
+
 }

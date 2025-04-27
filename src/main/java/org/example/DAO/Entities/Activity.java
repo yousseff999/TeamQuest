@@ -1,5 +1,6 @@
 package org.example.DAO.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -30,6 +31,7 @@ public class Activity {
      int maxParticipants;
      String status;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "event_id")
      Event event;
     @ManyToMany

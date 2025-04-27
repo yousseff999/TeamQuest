@@ -7,7 +7,8 @@ import org.example.DAO.Entities.Question;
 import java.util.List;
 
 public interface ChallengeIService {
-    public Challenge createChallenge(Challenge challenge);
+    public Challenge createChallenge(Challenge challenge, Integer creatorId, Integer opponentId) ;
+    public List<Challenge> getChallengesByUser(int creatorId, int opponentId);
     public List<Challenge> getAllChallenges();
     public Challenge updateChallenge(int id, Challenge challengeDetails);
     public void deleteChallenge(int id);

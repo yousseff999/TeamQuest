@@ -9,6 +9,7 @@ import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.EventRepository;
 import org.example.Services.EventIService;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,10 +39,10 @@ public class EventRestController {
         return ResponseEntity.ok(event);
     }
 
-    @DeleteMapping("/delete/{eventId}")
-    public ResponseEntity<String> deleteEvent(@PathVariable int eventId) {
-        eventIService.deleteEvent(eventId);
-        return ResponseEntity.ok("Event deleted successfully.");
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable Integer id) {
+        eventIService.deleteEvent(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/category/{category}")
@@ -65,6 +66,11 @@ public class EventRestController {
     public ResponseEntity<Event> addUserToEvent(@PathVariable int eventId, @PathVariable int userId) {
         Event event = eventIService.addUserToEvent(eventId, userId);
         return ResponseEntity.ok(event);
+    }
+    @DeleteMapping("/{eventId}/users/{userId}")
+    public ResponseEntity<Event> removeUserFromEvent(@PathVariable int eventId, @PathVariable int userId) {
+        Event event = eventIService.removeUserFromEvent(eventId, userId);
+        return new ResponseEntity<>(event, HttpStatus.OK);
     }
 
     @GetMapping("/{eventId}/users")

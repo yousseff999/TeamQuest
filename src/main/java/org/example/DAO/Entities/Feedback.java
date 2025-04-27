@@ -1,5 +1,6 @@
 package org.example.DAO.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -19,6 +20,7 @@ public class Feedback {
      String title;
      String description;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "event_id", nullable = false)
      Event event;
     @ManyToOne

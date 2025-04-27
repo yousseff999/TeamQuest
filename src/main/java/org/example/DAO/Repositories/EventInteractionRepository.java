@@ -6,6 +6,9 @@ import org.example.DAO.Entities.Event;
 import org.example.DAO.Entities.EventInteraction;
 import org.example.DAO.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -14,5 +17,8 @@ public interface EventInteractionRepository extends JpaRepository<EventInteracti
     List<EventInteraction> findByEventEventId(int eventId);
     List<EventInteraction> findByUserAndEvent(User user, Event event);
     List<EventInteraction> findByEventAndInteractionType(Event event, InteractionType interactionType);
+    @Modifying
+    @Query("DELETE FROM EventInteraction ei WHERE ei.event.eventId = :eventId")
+    void deleteByEventId(@Param("eventId") int eventId);
 
 }

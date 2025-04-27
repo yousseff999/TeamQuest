@@ -1,5 +1,6 @@
 package org.example.DAO.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.example.DAO.ENUM.Role;
@@ -25,21 +26,31 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
     String username;
     String email;
     String password;
     int score_u;
-    private String resetToken;
-    private LocalDateTime tokenExpirationTime;
+    String resetToken;
+    LocalDateTime tokenExpirationTime;
 
     @Enumerated(EnumType.STRING)
-    Role role;  // Role Enum to define user roles (e.g., ADMIN, USER)
+    Role role;
+
+    // ✅ Challenges this user created
+    @OneToMany(mappedBy = "creator")
+    @JsonIgnore
+    List<Challenge> createdChallenges = new ArrayList<>();
+
+    // ✅ Challenges where this user is the opponent
+    @OneToMany(mappedBy = "opponent")
+    @JsonIgnore
+    List<Challenge> receivedChallenges = new ArrayList<>();
 
     @ManyToMany(mappedBy = "participants")
     List<Event> events;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "team_id")
     Team team;
 
@@ -55,6 +66,7 @@ public class User implements UserDetails {
 
     // UserDetails implementation
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(() -> "ROLE_" + role.name());  // Map Role Enum to authorities
     }

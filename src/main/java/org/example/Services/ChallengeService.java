@@ -6,6 +6,7 @@ import org.example.DAO.Entities.*;
 import org.example.DAO.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,10 +21,23 @@ public class ChallengeService implements ChallengeIService {
     private QuestionRepository questionRepository;
     ChallengeRepository challengeRepository;
 
+    @Override
+    public Challenge createChallenge(Challenge challenge, Integer creatorId, Integer opponentId) {
+        User creator = userRepository.findById(creatorId)
+                .orElseThrow(() -> new RuntimeException("Creator not found"));
+        User opponent = userRepository.findById(opponentId)
+                .orElseThrow(() -> new RuntimeException("Opponent not found"));
+
+        challenge.setCreator(creator);
+        challenge.setOpponent(opponent);
+
+        return challengeRepository.save(challenge);
+    }
+
 
     @Override
-    public Challenge createChallenge(Challenge challenge) {
-        return challengeRepository.save(challenge);
+    public List<Challenge> getChallengesByUser(int creatorId, int opponentId) {
+        return challengeRepository.findByCreatorIdOrOpponentId(creatorId, opponentId);
     }
 
     public List<Challenge> getAllChallenges() {

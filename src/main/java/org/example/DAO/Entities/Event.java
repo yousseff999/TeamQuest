@@ -28,6 +28,7 @@ public class Event {
      String eventImage;
     @Enumerated(EnumType.STRING)
     TypeEvent eventType;
+    @JsonIgnore
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     List<Feedback> feedbacks;
     @JsonIgnore
@@ -38,6 +39,7 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
      List<User> participants;
+    @JsonIgnore
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     List<Activity> activities;
 }

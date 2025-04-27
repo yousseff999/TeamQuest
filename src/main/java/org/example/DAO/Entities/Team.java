@@ -22,6 +22,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      int id;
      String name;
+     String description;
      LocalDate creationDate;
      int score_t;
 

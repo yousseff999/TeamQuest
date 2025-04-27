@@ -52,4 +52,7 @@ public class TeamRestController {
     public Team removeUserFromTeam(@PathVariable int teamId, @PathVariable int userId) {
         return teamIService.removeUserFromTeam(teamId, userId);
     }
+
+
+
 }

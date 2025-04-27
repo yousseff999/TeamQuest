@@ -23,4 +23,5 @@ public interface EventIService {
     public void recordInteraction(int userId, int eventId, InteractionType interactionType);
     public List<EventInteraction> getUserInteractions(int userId);
     public List<EventInteraction> getEventInteractions(int eventId);
+    public Event removeUserFromEvent(int eventId, int userId);
 }

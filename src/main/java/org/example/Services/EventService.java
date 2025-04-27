@@ -14,6 +14,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,10 +56,11 @@ public class EventService implements EventIService{
         }
     }
 
+    @Transactional
     public void deleteEvent(int eventId) {
-        if (!eventRepository.existsById(eventId)) {
-            throw new RuntimeException("Event not found with ID: " + eventId);
-        }
+        // Delete related event_interaction records
+        eventInteractionRepository.deleteByEventId(eventId);
+        // Delete the event
         eventRepository.deleteById(eventId);
     }
 
@@ -85,6 +87,26 @@ public class EventService implements EventIService{
         event.getParticipants().add(user);
         return eventRepository.save(event);
     }
+    public Event removeUserFromEvent(int eventId, int userId) {
+        // Récupérer l'événement par ID
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found with ID: " + eventId));
+
+        // Récupérer l'utilisateur par ID
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        // Supprimer l'utilisateur de la liste des participants
+        if (event.getParticipants().contains(user)) {
+            event.getParticipants().remove(user);
+        } else {
+            throw new RuntimeException("User is not a participant of the event");
+        }
+
+        // Sauvegarder l'événement avec la liste mise à jour
+        return eventRepository.save(event);
+    }
+
 
     public List<User> showEventUsers(int eventId) {
         Event event = eventRepository.findById(eventId)

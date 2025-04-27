@@ -39,7 +39,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @CrossOrigin("*")
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -53,16 +53,18 @@ public class AuthController {
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request) {
+    public ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> request) {
         String email = request.get("email");
         authService.sendPasswordResetEmail(email);
-        return ResponseEntity.ok("Password reset email sent.");
+        return ResponseEntity.ok("Email de réinitialisation envoyé.");
     }
 
-    // Endpoint to reset password
+    // 2. Réinitialiser le mot de passe avec le token
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
-        authService.resetPassword(request.getToken(), request.getNewPassword());
-        return ResponseEntity.ok("Password reset successful.");
+    public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> request) {
+        String token = request.get("token");
+        String newPassword = request.get("newPassword");
+        authService.resetPassword(token, newPassword);
+        return ResponseEntity.ok("Mot de passe réinitialisé avec succès.");
     }
 }
