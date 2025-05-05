@@ -2,6 +2,7 @@ package org.example.RestController;
 
 import lombok.AllArgsConstructor;
 import org.example.DAO.Entities.Department;
+import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.DepartmentRepository;
 import org.example.Services.DepartmentIService;
 import org.springframework.context.annotation.Configuration;
@@ -42,4 +43,18 @@ public class DepartmentRestController {
         departmentIService.deleteDepartment(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{departmentId}/addUser/{userId}")
+    public ResponseEntity<Department> addUserToDepartment(@PathVariable int departmentId, @PathVariable int userId) {
+        return ResponseEntity.ok(departmentIService.addUserToDepartment(departmentId, userId));
+    }
+
+    @PutMapping("/{departmentId}/removeUser/{userId}")
+    public ResponseEntity<Department> removeUserFromDepartment(@PathVariable int departmentId, @PathVariable int userId) {
+        return ResponseEntity.ok(departmentIService.removeUserFromDepartment(departmentId, userId));
+    }
+    @GetMapping("/{departmentId}/users")
+    public ResponseEntity<List<User>> getUsersByDepartment(@PathVariable int departmentId) {
+        return ResponseEntity.ok(departmentIService.getUsersByDepartment(departmentId));
+    }
+
 }

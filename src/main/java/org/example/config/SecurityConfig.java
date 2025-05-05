@@ -43,7 +43,10 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT, "/Events/*/upload-image").permitAll()
                 .antMatchers("/Event/**", "/Event/all","/Event/update/","/Event/delete/").permitAll()
                 .antMatchers("/Team/**").permitAll()
+                .antMatchers("/User/**").permitAll()
+                .antMatchers("/Department/**").permitAll()
                 .antMatchers("/Challenge/**").permitAll()
+                .antMatchers("/Activity/**").permitAll()
                 .antMatchers("/ws/**", "/topic/**", "/app/**").permitAll()
                 .anyRequest().authenticated()  // Secure other endpoints
                 .and()

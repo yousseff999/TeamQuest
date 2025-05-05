@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 @EnableWebMvc
@@ -65,14 +66,19 @@ public class UserRestController {
         }
     }
 
-    @PostMapping("/{id}/assign-role")
-    public ResponseEntity<User> assignRoleToUser(@PathVariable int id, @RequestParam Role role) {
+    @PutMapping("/{id}/assign-role")
+    public ResponseEntity<User> assignRoleToUser(@PathVariable int id, @RequestBody Map<String, String> requestBody) {
         try {
+            String roleString = requestBody.get("role");
+            Role role = Role.valueOf(roleString); // Convert String to Enum if needed
             return new ResponseEntity<>(userIService.assignRoleToUser(id, role), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // Invalid role
         } catch (RuntimeException ex) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("/role")
     public List<User> getUsersByRole(@RequestParam Role role) {

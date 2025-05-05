@@ -2,13 +2,16 @@ package org.example.Services;
 
 import lombok.AllArgsConstructor;
 import org.example.DAO.Entities.Department;
+import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.DepartmentRepository;
+import org.example.DAO.Repositories.UserRepository;
 
 import java.util.List;
 
 @org.springframework.stereotype.Service
 @AllArgsConstructor
 public class DepartmentService implements DepartmentIService {
+    UserRepository userRepository;
     DepartmentRepository departmentRepository;
 
     public Department createDepartment(Department department) {
@@ -33,4 +36,37 @@ public class DepartmentService implements DepartmentIService {
         Department department = getDepartmentById(id);
         departmentRepository.delete(department);
     }
+
+    @Override
+    public Department addUserToDepartment(int departmentId, int userId) {
+        Department department = getDepartmentById(departmentId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        user.setDepartment(department);
+        userRepository.save(user); // mise à jour de l'utilisateur
+
+        return department;
+    }
+
+    @Override
+    public Department removeUserFromDepartment(int departmentId, int userId) {
+        Department department = getDepartmentById(departmentId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        if (user.getDepartment() != null && user.getDepartment().getId() == departmentId) {
+            user.setDepartment(null);
+            userRepository.save(user);
+        }
+
+        return department;
+    }
+    @Override
+    public List<User> getUsersByDepartment(int departmentId) {
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(() -> new RuntimeException("Department not found with ID: " + departmentId));
+        return department.getUsers();
+    }
+
 }

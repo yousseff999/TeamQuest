@@ -66,6 +66,28 @@ public class ActivityService implements ActivityIService{
             throw new RuntimeException("Failed to update activity photo", e);
         }
     }
+    @Override
+    public Activity updateActivity(int activityID, Activity updatedActivity) {
+        Activity existingActivity = activityRepository.findById(activityID)
+                .orElseThrow(() -> new RuntimeException("Activity not found"));
+
+        existingActivity.setActivityName(updatedActivity.getActivityName());
+        existingActivity.setDescription(updatedActivity.getDescription());
+        existingActivity.setStartDate(updatedActivity.getStartDate());
+        existingActivity.setEndDate(updatedActivity.getEndDate());
+        existingActivity.setStatus(updatedActivity.getStatus());
+        existingActivity.setCurrentParticipants(updatedActivity.getCurrentParticipants());
+        existingActivity.setMaxParticipants(updatedActivity.getMaxParticipants());
+        // You can add more fields if needed
+
+        return activityRepository.save(existingActivity);
+    }
+
+    @Override
+    public Activity getActivityById(int activityID) {
+        return activityRepository.findById(activityID)
+                .orElseThrow(() -> new RuntimeException("Activity not found"));
+    }
 
     @Override
     public String getImageUrlForActivityByID(int activityID) {

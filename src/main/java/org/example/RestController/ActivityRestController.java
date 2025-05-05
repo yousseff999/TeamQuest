@@ -39,6 +39,18 @@ public class ActivityRestController {
         Activity updatedActivity = activityIService.updateActivityImage(activityID, activityImage);
         return ResponseEntity.ok(updatedActivity);
     }
+    @PutMapping("/{id}/update")
+    public ResponseEntity<Activity> updateActivity(
+            @PathVariable("id") int activityID,
+            @RequestBody Activity updatedActivity) {
+        Activity result = activityIService.updateActivity(activityID, updatedActivity);
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Activity> getActivityById(@PathVariable("id") int activityID) {
+        Activity activity = activityIService.getActivityById(activityID);
+        return ResponseEntity.ok(activity);
+    }
 
     @GetMapping("/{id}/image")
     public ResponseEntity<String> getActivityImageUrl(@PathVariable("id") int activityID) {
@@ -107,9 +119,9 @@ public class ActivityRestController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteActivity(@PathVariable int id) {
+    public ResponseEntity<Void> deleteActivity(@PathVariable int id) {
         activityIService.deleteActivity(id);
-        return ResponseEntity.ok("Activity deleted successfully.");
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/show_open")
