@@ -1,5 +1,5 @@
 package org.example.DAO.ENUM;
 
 public enum InteractionType {
-   PARTICIPATE, LIKE, COMMENT
+   LIKE, DISLIKE, INTERRESTED
 }

@@ -64,6 +64,9 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "users")
     private Set<Activity> activities;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    List<Portfolio> portfolios = new ArrayList<>();
     // UserDetails implementation
     @Override
     @JsonIgnore

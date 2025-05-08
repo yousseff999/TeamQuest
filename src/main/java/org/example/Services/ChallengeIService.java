@@ -3,6 +3,7 @@ package org.example.Services;
 import org.example.DAO.ENUM.RankType;
 import org.example.DAO.Entities.Challenge;
 import org.example.DAO.Entities.Question;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface ChallengeIService {
     public void updateUserScore(int userId, int score);
     public void updateTeamScore(int teamId, int earnedScore);
     public void updateDepartmentScore(int departmentId, int earnedScore);
+
+
 }

@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .antMatchers("/Department/**").permitAll()
                 .antMatchers("/Challenge/**").permitAll()
                 .antMatchers("/Activity/**").permitAll()
+                .antMatchers("/Portfolio/**").permitAll()
                 .antMatchers("/ws/**", "/topic/**", "/app/**").permitAll()
                 .anyRequest().authenticated()  // Secure other endpoints
                 .and()

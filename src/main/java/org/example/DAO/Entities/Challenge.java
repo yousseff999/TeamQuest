@@ -24,6 +24,7 @@ public class Challenge {
      int difficultyLevel;
      int score_c;
 
+
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
     User creator;
