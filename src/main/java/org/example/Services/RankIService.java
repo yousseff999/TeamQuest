@@ -13,4 +13,5 @@ public interface RankIService {
     public void deleteRank(int rankId);
     public Rank updateDepartmentRank(int departmentId);
     public void updateRank(Integer entityId, RankType rankType);
+    public List<Rank> getLeaderboardByType(RankType rankType);
 }

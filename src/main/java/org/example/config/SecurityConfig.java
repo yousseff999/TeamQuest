@@ -48,6 +48,8 @@ public class SecurityConfig {
                 .antMatchers("/Challenge/**").permitAll()
                 .antMatchers("/Activity/**").permitAll()
                 .antMatchers("/Portfolio/**").permitAll()
+                .antMatchers("/Rank/**").permitAll()
+                .antMatchers("/Feedback/**").permitAll()
                 .antMatchers("/ws/**", "/topic/**", "/app/**").permitAll()
                 .anyRequest().authenticated()  // Secure other endpoints
                 .and()

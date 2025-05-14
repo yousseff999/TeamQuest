@@ -18,6 +18,7 @@ public interface ChallengeIService {
     public void updateUserScore(int userId, int score);
     public void updateTeamScore(int teamId, int earnedScore);
     public void updateDepartmentScore(int departmentId, int earnedScore);
+    public int getDifficultyLevelByChallengeId(int challengeId);
 
 
 }

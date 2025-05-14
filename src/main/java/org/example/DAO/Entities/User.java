@@ -35,7 +35,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     Role role;
-
+    public int getScoreU() {
+        return score_u;
+    }
     // ✅ Challenges this user created
     @OneToMany(mappedBy = "creator")
     @JsonIgnore

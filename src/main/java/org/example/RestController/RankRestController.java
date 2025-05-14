@@ -3,6 +3,9 @@ package org.example.RestController;
 import lombok.AllArgsConstructor;
 import org.example.DAO.ENUM.RankType;
 import org.example.DAO.Entities.Rank;
+import org.example.DAO.Repositories.DepartmentRepository;
+import org.example.DAO.Repositories.TeamRepository;
+import org.example.DAO.Repositories.UserRepository;
 import org.example.Services.RankIService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,9 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class RankRestController {
     RankIService rankIService;
+    private UserRepository userRepository;
+    private TeamRepository teamRepository;
+    private DepartmentRepository departmentRepository;
 
     @PutMapping("/update/user/{userId}")
     public ResponseEntity<Rank> updateUserRank(@PathVariable int userId) {
@@ -59,5 +65,18 @@ public class RankRestController {
         // Update the rank based on userId, teamId, or departmentId and rankType
         rankIService.updateRank(entityId, rankType);
         return ResponseEntity.ok("Rank updated successfully.");
+    }
+    @GetMapping("/leaderboard/{type}")
+    public ResponseEntity<List<Rank>> getLeaderboard(@PathVariable String type) {
+        try {
+            RankType rankType = RankType.valueOf(type.toUpperCase()); // convertit "user" en "USER"
+            List<Rank> leaderboard = rankIService.getLeaderboardByType(rankType);
+            return ResponseEntity.ok(leaderboard);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build(); // type invalide
+        }
+
+
+
     }
 }

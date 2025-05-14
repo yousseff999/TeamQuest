@@ -148,6 +148,9 @@ public class ChallengeRestController {
         }
     }
 
-
+    @GetMapping("/{id}/difficultylevel")
+    public int getDifficultyLevel(@PathVariable int id) {
+        return challengeIService.getDifficultyLevelByChallengeId(id);
+    }
 
 }

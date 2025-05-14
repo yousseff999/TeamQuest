@@ -1,8 +1,10 @@
 package org.example.Services;
 
+import org.example.DAO.ENUM.Role;
 import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,18 +12,21 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Pattern;
+
 @Service
 public class AuthService {
      UserRepository userRepository;
-
+     UserService userService;
      EmailService emailService;
 
      PasswordEncoder passwordEncoder;
     @Autowired
-    public AuthService(UserRepository userRepository, EmailService emailService, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, EmailService emailService, PasswordEncoder passwordEncoder,@Lazy UserService userService) {
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 
     // 1️⃣ Generate Reset Token and Send Email
@@ -70,5 +75,44 @@ public class AuthService {
 
         // 4. Save changes
         userRepository.save(user);
+    }
+
+    public User signUp(String name, String email, String password, String confirmPassword) {
+        // Validate input
+        if (name == null || name.trim().isEmpty()) {
+            throw new RuntimeException("Name is required");
+        }
+        if (email == null || email.trim().isEmpty()) {
+            throw new RuntimeException("Email is required");
+        }
+        if (password == null || password.trim().isEmpty()) {
+            throw new RuntimeException("Password is required");
+        }
+        if (confirmPassword == null || confirmPassword.trim().isEmpty()) {
+            throw new RuntimeException("Confirm password is required");
+        }
+
+        // Validate email format
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        if (!pattern.matcher(email).matches()) {
+            throw new RuntimeException("Invalid email format");
+        }
+
+        // Check if password and confirm password match
+        if (!password.equals(confirmPassword)) {
+            throw new RuntimeException("Passwords do not match");
+        }
+
+        // Create user object
+        User user = new User();
+        user.setUsername(email); // Assuming username is same as email, adjust if needed
+        user.setEmail(email);
+        user.setPassword(password); // Will be encoded in UserService
+        user.setUsername(name);
+        user.setRole(Role.USER); // Default role
+
+        // Delegate to UserService to create user
+        return userService.createUser(user);
     }
 }

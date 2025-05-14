@@ -144,4 +144,8 @@ public class RankService implements RankIService{
         // Save the updated Rank
         rankRepository.save(rank);
     }
+    public List<Rank> getLeaderboardByType(RankType rankType) {
+        // Récupère tous les rangs du type demandé, triés par score décroissant
+        return rankRepository.findByRankTypeOrderByScoreDesc(rankType);
+    }
 }

@@ -1,5 +1,6 @@
 package org.example.RestController;
 
+import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.UserRepository;
 import org.example.DTO.ForgotPasswordRequest;
 import org.example.DTO.LoginRequest;
@@ -67,4 +68,25 @@ public class AuthController {
         authService.resetPassword(token, newPassword);
         return ResponseEntity.ok("Mot de passe réinitialisé avec succès.");
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signUp(@RequestBody Map<String, String> request) {
+        String name = request.get("name");
+        String email = request.get("email");
+        String password = request.get("password");
+        String confirmPassword = request.get("confirmPassword");
+
+        // Create user
+        User user = authService.signUp(name, email, password, confirmPassword);
+
+        // Authenticate the user
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        String jwt = jwtUtil.generateToken(userDetails.getUser());
+
+        return ResponseEntity.ok(new LoginResponse(jwt, userDetails.getId(), userDetails.getRole()));
+    }
+
 }

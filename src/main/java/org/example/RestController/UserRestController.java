@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,5 +95,30 @@ public class UserRestController {
     @GetMapping("/count-by-role")
     public long countUsersByRole(@RequestParam Role role) {
         return userIService.countUsersByRole(role);
+    }
+
+    @GetMapping("/top-scores")
+    public ResponseEntity<List<Map<String, Object>>> getUsersByScoreDesc() {
+        List<User> users = userIService.getUsersByScoreDesc();
+
+        // Ne retourner que le nom et le score
+        List<Map<String, Object>> response = new ArrayList<>();
+        for (User user : users) {
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("username", user.getUsername());
+            userData.put("score", user.getScore_u());
+            response.add(userData);
+        }
+
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/top-scorer")
+    public ResponseEntity<?> getTopScorer() {
+        User topScorer = userIService.getTopScorer();
+        if (topScorer != null) {
+            return ResponseEntity.ok(topScorer);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No users found with scores.");
+        }
     }
 }

@@ -5,10 +5,12 @@ import org.example.DAO.ENUM.Role;
 import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,5 +101,13 @@ public class UserService implements UserIService {
         }
         User user = userOptional.get();
         return UserDetailsImpl.build(user);
+    }
+    @Override
+    public List<User> getUsersByScoreDesc() {
+        return userRepository.findAllByOrderByScoreUDesc();
+    }
+    @Override
+    public User getTopScorer() {
+        return userRepository.findTopByOrderByScore_uDesc();
     }
 }

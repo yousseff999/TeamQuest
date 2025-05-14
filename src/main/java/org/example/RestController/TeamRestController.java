@@ -54,5 +54,9 @@ public class TeamRestController {
     }
 
 
+    @GetMapping("/scores")
+    public List<Object[]> getTeamNamesAndScores() {
+        return teamIService.getAllTeamNamesAndScoresOrdered();
+    }
 
 }

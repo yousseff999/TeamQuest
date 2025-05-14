@@ -17,6 +17,7 @@ public interface UserIService {
     public List<User> getUsersByRole(Role role);
     public List<User> searchUsers(String query);
     public long countUsersByRole(Role role);
-
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    public List<User> getUsersByScoreDesc();
+    public User getTopScorer();
 }

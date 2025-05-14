@@ -1,8 +1,11 @@
 package org.example.RestController;
 
 import lombok.AllArgsConstructor;
+import org.example.DAO.Entities.ContactDTO;
 import org.example.DAO.Entities.Feedback;
+import org.example.Services.EmailService;
 import org.example.Services.FeedbackIService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +21,24 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class FeedbackRestController {
     FeedbackIService feedbackService;
+    @Autowired
+    private EmailService emailService;
 
+    @PostMapping("/sendemail")
+    public ResponseEntity<String> sendContactForm(@RequestBody ContactDTO contact) {
+        String to = "youssef.zammit999@gmail.com"; // Replace with your target recipient
+        String subject = "Contact Form: " + contact.getSubject();
+
+        String text = """
+            <h3>New Contact Form Submission</h3>
+            <p><strong>Name:</strong> %s</p>
+            <p><strong>Email:</strong> %s</p>
+            <p><strong>Message:</strong><br/>%s</p>
+        """.formatted(contact.getName(), contact.getEmail(), contact.getMessage());
+
+        emailService.sendEmail(to, subject, text);
+        return ResponseEntity.ok("Message sent successfully");
+    }
     @PostMapping("/add/{eventId}/{userId}")
     public ResponseEntity<Feedback> addFeedback(@PathVariable int eventId, @PathVariable int userId, @RequestBody Feedback feedback) {
         Feedback createdFeedback = feedbackService.addFeedback(eventId, userId, feedback);

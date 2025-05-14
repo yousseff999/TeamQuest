@@ -77,5 +77,9 @@ public class TeamService implements TeamIService{
         return teamRepository.save(team); // Save the updated team
     }
 
+    public List<Object[]> getAllTeamNamesAndScoresOrdered() {
+        return teamRepository.findAllTeamNamesAndScoresOrderedByScoreDesc();
+    }
+
 
 }

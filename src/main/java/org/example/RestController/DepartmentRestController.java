@@ -56,5 +56,8 @@ public class DepartmentRestController {
     public ResponseEntity<List<User>> getUsersByDepartment(@PathVariable int departmentId) {
         return ResponseEntity.ok(departmentIService.getUsersByDepartment(departmentId));
     }
-
+    @GetMapping("/names-scores")
+    public List<Object[]> getDepartmentNamesAndScores() {
+        return departmentIService.getAllDepartmentNamesAndScoresOrdered();
+    }
 }

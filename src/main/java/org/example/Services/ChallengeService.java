@@ -123,7 +123,11 @@ public class ChallengeService implements ChallengeIService {
         departmentRepository.save(department);
     }
 
-
+    public int getDifficultyLevelByChallengeId(int challengeId) {
+        Challenge challenge = challengeRepository.findById(challengeId)
+                .orElseThrow(() -> new RuntimeException("Challenge not found"));
+        return challenge.getDifficultyLevel();
+    }
 
 
 

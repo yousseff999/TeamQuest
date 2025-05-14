@@ -68,5 +68,7 @@ public class DepartmentService implements DepartmentIService {
                 .orElseThrow(() -> new RuntimeException("Department not found with ID: " + departmentId));
         return department.getUsers();
     }
-
+    public List<Object[]> getAllDepartmentNamesAndScoresOrdered() {
+        return departmentRepository.findAllDepartmentNamesAndScoresOrderedByScoreDesc();
+    }
 }
