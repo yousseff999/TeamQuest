@@ -81,5 +81,16 @@ public class TeamService implements TeamIService{
         return teamRepository.findAllTeamNamesAndScoresOrderedByScoreDesc();
     }
 
+    public Team getTeamByUserId(int userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Team team = user.getTeam();
+        if (team == null) {
+            throw new RuntimeException("This user is not in any team");
+        }
+
+        return team;
+    }
 
 }

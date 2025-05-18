@@ -1,22 +1,14 @@
 package org.example.Services;
 
 import lombok.AllArgsConstructor;
-import org.example.DAO.ENUM.RankType;
 import org.example.DAO.Entities.*;
 import org.example.DAO.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @org.springframework.stereotype.Service
 @AllArgsConstructor
@@ -30,6 +22,11 @@ public class ChallengeService implements ChallengeIService {
     ChallengeRepository challengeRepository;
     @Autowired
     private Environment environment;
+    @Autowired
+    private SubmissionRepository submissionRepository;
+
+    @Autowired
+    private BadgeRepository badgeRepository;
 
     @Override
     public Challenge createChallenge(Challenge challenge, Integer creatorId, Integer opponentId) {
@@ -131,6 +128,5 @@ public class ChallengeService implements ChallengeIService {
 
 
 
-
-
 }
+

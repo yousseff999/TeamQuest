@@ -13,4 +13,5 @@ public interface TeamIService {
     public Team addUserToTeam(int teamId, int userId);
     public Team removeUserFromTeam(int teamId, int userId);
     public List<Object[]> getAllTeamNamesAndScoresOrdered();
+    public Team getTeamByUserId(int userId);
 }

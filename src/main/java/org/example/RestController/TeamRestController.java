@@ -2,9 +2,11 @@ package org.example.RestController;
 
 import lombok.AllArgsConstructor;
 import org.example.DAO.Entities.Team;
+import org.example.DAO.Repositories.TeamRepository;
 import org.example.Services.TeamIService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -18,7 +20,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class TeamRestController {
     TeamIService teamIService;
-
+    TeamRepository teamRepository;
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Team createTeam(@RequestBody Team team) {
@@ -57,6 +59,10 @@ public class TeamRestController {
     @GetMapping("/scores")
     public List<Object[]> getTeamNamesAndScores() {
         return teamIService.getAllTeamNamesAndScoresOrdered();
+    }
+    @GetMapping("/teamuser/{userId}")
+    public ResponseEntity<Team> getTeamByUserId(@PathVariable int userId) {
+        return ResponseEntity.ok(teamIService.getTeamByUserId(userId));
     }
 
 }
