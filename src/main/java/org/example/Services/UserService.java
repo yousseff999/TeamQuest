@@ -6,6 +6,7 @@ import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -110,4 +111,15 @@ public class UserService implements UserIService {
     public User getTopScorer() {
         return userRepository.findTopByOrderByScore_uDesc();
     }
+
+    public void updateScore_u(int userId, int scoreToAdd) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setScore_u(user.getScoreU() + scoreToAdd);
+        userRepository.save(user);
+    }
+    public long countAllUsers() {
+        return userRepository.count();
+    }
+
 }

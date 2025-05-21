@@ -10,4 +10,5 @@ import java.util.List;
 public interface DepartmentRepository extends JpaRepository<Department,Integer> {
     @Query("SELECT d.name, d.score_d FROM Department d ORDER BY d.score_d DESC")
     List<Object[]> findAllDepartmentNamesAndScoresOrderedByScoreDesc();
+    long count();
 }

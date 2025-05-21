@@ -29,7 +29,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     List<User> findAllByOrderByScoreUDesc();
     @Query("SELECT u FROM User u WHERE u.score_u = (SELECT MAX(u2.score_u) FROM User u2)")
     User findTopByOrderByScore_uDesc();
-
+    long count();
 
 
 }

@@ -187,4 +187,7 @@ public class EventService implements EventIService{
     public List<EventInteraction> getEventInteractions(int eventId) {
         return eventInteractionRepository.findByEventEventId(eventId);
     }
+    public long getTotalUniqueParticipants() {
+        return eventRepository.countDistinctParticipants();
+    }
 }

@@ -71,4 +71,7 @@ public class DepartmentService implements DepartmentIService {
     public List<Object[]> getAllDepartmentNamesAndScoresOrdered() {
         return departmentRepository.findAllDepartmentNamesAndScoresOrderedByScoreDesc();
     }
+    public long countDepartments() {
+        return departmentRepository.count();
+    }
 }

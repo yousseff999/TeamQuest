@@ -14,4 +14,6 @@ public interface TeamIService {
     public Team removeUserFromTeam(int teamId, int userId);
     public List<Object[]> getAllTeamNamesAndScoresOrdered();
     public Team getTeamByUserId(int userId);
+    public long countAllTeams();
+    public double getWeeklyTeamsCreationPercentageChange();
 }

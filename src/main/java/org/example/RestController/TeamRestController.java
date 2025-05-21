@@ -64,5 +64,12 @@ public class TeamRestController {
     public ResponseEntity<Team> getTeamByUserId(@PathVariable int userId) {
         return ResponseEntity.ok(teamIService.getTeamByUserId(userId));
     }
-
+    @GetMapping("/count")
+    public long getTeamCount() {
+        return teamIService.countAllTeams();
+    }
+    @GetMapping("/weekly-percentage-change")
+    public double getWeeklyPercentageChange() {
+        return teamIService.getWeeklyTeamsCreationPercentageChange();
+    }
 }

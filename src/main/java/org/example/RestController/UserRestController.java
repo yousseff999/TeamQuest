@@ -3,12 +3,15 @@ package org.example.RestController;
 import lombok.AllArgsConstructor;
 import org.example.DAO.ENUM.Role;
 import org.example.DAO.Entities.User;
+import org.example.DAO.Repositories.UserRepository;
 import org.example.Services.UserIService;
+import org.example.Services.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import java.util.Map;
 public class UserRestController {
 
     private final UserIService userIService;
-
+    UserService userService;
     @PostMapping("/addUser")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
@@ -121,4 +124,21 @@ public class UserRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No users found with scores.");
         }
     }
+    @PutMapping("/{userId}/score")
+    public ResponseEntity<String> updateScore_u(
+            @PathVariable int userId,
+            @RequestParam int scoreToAdd) {
+        System.out.println("PUT /" + userId + "/score called with scoreToAdd=" + scoreToAdd); // <-- Add this
+        try {
+            userService.updateScore_u(userId, scoreToAdd);
+            return ResponseEntity.ok("User score updated successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+    @GetMapping("/count")
+    public long countAllUsers() {
+        return userService.countAllUsers();
+    }
+
 }

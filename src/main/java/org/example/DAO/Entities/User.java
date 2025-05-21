@@ -1,9 +1,11 @@
 package org.example.DAO.Entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.example.DAO.ENUM.Role;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -32,11 +34,21 @@ public class User implements UserDetails {
     int score_u;
     String resetToken;
     LocalDateTime tokenExpirationTime;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
     Role role;
     public int getScoreU() {
         return score_u;
+    }
+    public void setScore_u(int score_u) {
+        this.score_u = score_u;
+    }
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
     // ✅ Challenges this user created
     @OneToMany(mappedBy = "creator")

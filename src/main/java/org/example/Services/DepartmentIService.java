@@ -15,4 +15,5 @@ public interface DepartmentIService {
     public Department removeUserFromDepartment(int departmentId, int userId);
     public List<User> getUsersByDepartment(int departmentId);
     public List<Object[]> getAllDepartmentNamesAndScoresOrdered();
+    public long countDepartments();
 }

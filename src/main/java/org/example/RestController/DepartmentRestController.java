@@ -60,4 +60,8 @@ public class DepartmentRestController {
     public List<Object[]> getDepartmentNamesAndScores() {
         return departmentIService.getAllDepartmentNamesAndScoresOrdered();
     }
+    @GetMapping("/count")
+    public long getDepartmentCount() {
+        return departmentIService.countDepartments();
+    }
 }

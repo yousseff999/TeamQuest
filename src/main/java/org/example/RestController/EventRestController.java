@@ -110,4 +110,8 @@ public class EventRestController {
     public ResponseEntity<List<EventInteraction>> getEventInteractions(@PathVariable int eventId) {
         return ResponseEntity.ok(eventIService.getEventInteractions(eventId));
     }
+    @GetMapping("/participants/count")
+    public long getTotalUniqueParticipants() {
+        return eventIService.getTotalUniqueParticipants();
+    }
 }

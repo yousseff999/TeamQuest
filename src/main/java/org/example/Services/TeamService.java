@@ -6,6 +6,8 @@ import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.TeamRepository;
 import org.example.DAO.Repositories.UserRepository;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -92,5 +94,28 @@ public class TeamService implements TeamIService{
 
         return team;
     }
+    public long countAllTeams() {
+        return teamRepository.count();
+    }
+    public double getWeeklyTeamsCreationPercentageChange() {
+        LocalDate now = LocalDate.now();
 
+        // Get start and end of this week (Monday to Sunday)
+        LocalDate thisWeekStart = now.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
+        LocalDate thisWeekEnd = thisWeekStart.plusDays(6);
+
+        // Get start and end of previous week
+        LocalDate prevWeekStart = thisWeekStart.minusWeeks(1);
+        LocalDate prevWeekEnd = thisWeekEnd.minusWeeks(1);
+
+        long thisWeekCount = teamRepository.countTeamsCreatedBetween(thisWeekStart, thisWeekEnd);
+        long prevWeekCount = teamRepository.countTeamsCreatedBetween(prevWeekStart, prevWeekEnd);
+
+        if (prevWeekCount == 0) {
+            return thisWeekCount > 0 ? 100.0 : 0.0;  // If no teams last week, but some this week, 100%
+        }
+
+        // Calculate percentage change
+        return ((double)(thisWeekCount - prevWeekCount) / prevWeekCount) * 100;
+    }
 }

@@ -20,4 +20,5 @@ public interface UserIService {
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
     public List<User> getUsersByScoreDesc();
     public User getTopScorer();
+    public long countAllUsers();
 }
