@@ -118,4 +118,8 @@ public class TeamService implements TeamIService{
         // Calculate percentage change
         return ((double)(thisWeekCount - prevWeekCount) / prevWeekCount) * 100;
     }
+    public Team getTopScoringTeam() {
+        return teamRepository.findTopByOrderByScore_tDesc();
+    }
+
 }

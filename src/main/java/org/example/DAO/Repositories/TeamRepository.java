@@ -23,5 +23,7 @@ public interface TeamRepository extends JpaRepository<Team,Integer> {
     long countAllTeams();
     @Query("SELECT COUNT(t) FROM Team t WHERE t.creationDate BETWEEN :startDate AND :endDate")
     long countTeamsCreatedBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    @Query("SELECT t FROM Team t WHERE t.score_t = (SELECT MAX(t2.score_t) FROM Team t2)")
+    Team findTopByOrderByScore_tDesc();
 
 }

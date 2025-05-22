@@ -52,6 +52,7 @@ public class SecurityConfig {
                 .antMatchers("/Feedback/**").permitAll()
                 .antMatchers("/Defi/**").permitAll()
                 .antMatchers("/api/**").permitAll()
+                .antMatchers("/api/stats/**").permitAll()
                 .antMatchers("/ws/**", "/topic/**", "/app/**").permitAll()
                 .anyRequest().authenticated()  // Secure other endpoints
                 .and()

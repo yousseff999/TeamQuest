@@ -1,6 +1,7 @@
 package org.example.DAO.Repositories;
 
 import org.example.DAO.ENUM.InteractionType;
+import org.example.DAO.ENUM.TypeEvent;
 import org.example.DAO.Entities.Department;
 import org.example.DAO.Entities.Event;
 import org.example.DAO.Entities.EventInteraction;
@@ -20,5 +21,10 @@ public interface EventInteractionRepository extends JpaRepository<EventInteracti
     @Modifying
     @Query("DELETE FROM EventInteraction ei WHERE ei.event.eventId = :eventId")
     void deleteByEventId(@Param("eventId") int eventId);
+    @Query("SELECT ei.interactionType, COUNT(ei) FROM EventInteraction ei GROUP BY ei.interactionType")
+    List<Object[]> countAllInteractions();
+
+    @Query("SELECT ei.interactionType, COUNT(ei) FROM EventInteraction ei WHERE ei.event.eventType = :type GROUP BY ei.interactionType")
+    List<Object[]> countInteractionsByType(@Param("type") TypeEvent type);
 
 }

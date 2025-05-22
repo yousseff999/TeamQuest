@@ -72,4 +72,9 @@ public class TeamRestController {
     public double getWeeklyPercentageChange() {
         return teamIService.getWeeklyTeamsCreationPercentageChange();
     }
+    @GetMapping("/top-scoring")
+    public ResponseEntity<Team> getTopScoringTeam() {
+        Team topTeam = teamIService.getTopScoringTeam();
+        return ResponseEntity.ok(topTeam);
+    }
 }

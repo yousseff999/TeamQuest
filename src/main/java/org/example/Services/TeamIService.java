@@ -16,4 +16,5 @@ public interface TeamIService {
     public Team getTeamByUserId(int userId);
     public long countAllTeams();
     public double getWeeklyTeamsCreationPercentageChange();
+    public Team getTopScoringTeam();
 }
