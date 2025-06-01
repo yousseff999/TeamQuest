@@ -190,4 +190,8 @@ public class EventService implements EventIService{
     public long getTotalUniqueParticipants() {
         return eventRepository.countDistinctParticipants();
     }
+    @Override
+    public long getTotalUserParticipations() {
+        return eventRepository.countAllUserParticipations();
+    }
 }

@@ -1,6 +1,7 @@
 package org.example.Services;
 
 import org.example.DAO.ENUM.Role;
+
 import org.example.DAO.Entities.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,4 +22,9 @@ public interface UserIService {
     public List<User> getUsersByScoreDesc();
     public User getTopScorer();
     public long countAllUsers();
+    public User getMostEngagedUser();
+    public User getLeastEngagedUser();
+    public List<User> getAllUsersByEngagementDesc();
+
+
 }

@@ -114,4 +114,8 @@ public class EventRestController {
     public long getTotalUniqueParticipants() {
         return eventIService.getTotalUniqueParticipants();
     }
+    @GetMapping("/total-participations")
+    public long getTotalUserParticipations() {
+        return eventIService.getTotalUserParticipations();
+    }
 }

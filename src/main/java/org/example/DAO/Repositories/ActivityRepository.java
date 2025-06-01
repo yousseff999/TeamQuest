@@ -11,5 +11,5 @@ public interface ActivityRepository extends JpaRepository<Activity,Integer> {
     List<Activity> findByStatus(String status);
     List<Activity> findActivitiesByActivityNameContainingIgnoreCase(String activityName);
     List<Activity> findActivitiesByStartDateBefore(LocalDate startDate);
-
+    List<Activity> findByEvent_EventId(int eventId);
 }

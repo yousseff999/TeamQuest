@@ -30,6 +30,11 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("SELECT u FROM User u WHERE u.score_u = (SELECT MAX(u2.score_u) FROM User u2)")
     User findTopByOrderByScore_uDesc();
     long count();
-
+    @Query("SELECT u FROM User u " +
+            "LEFT JOIN u.events e " +
+            "LEFT JOIN EventInteraction i ON i.user = u " +
+            "GROUP BY u.id " +
+            "ORDER BY (COUNT(DISTINCT e) + COUNT(i)) DESC")
+    List<User> findUsersByEngagement();
 
 }

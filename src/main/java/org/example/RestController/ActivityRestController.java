@@ -184,4 +184,10 @@ public class ActivityRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
         }
     }
+
+    @GetMapping("/by-event/{eventId}")
+    public ResponseEntity<List<Activity>> getActivitiesByEvent(@PathVariable int eventId) {
+        List<Activity> activities = activityIService.getActivitiesByEventId(eventId);
+        return ResponseEntity.ok(activities);
+    }
 }

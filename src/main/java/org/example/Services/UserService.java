@@ -1,17 +1,14 @@
 package org.example.Services;
 
-import lombok.AllArgsConstructor;
 import org.example.DAO.ENUM.Role;
+
 import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +20,7 @@ public class UserService implements UserIService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -120,6 +118,19 @@ public class UserService implements UserIService {
     }
     public long countAllUsers() {
         return userRepository.count();
+    }
+    public User getMostEngagedUser() {
+        List<User> users = userRepository.findUsersByEngagement();
+        return users.isEmpty() ? null : users.get(0);
+    }
+
+    public User getLeastEngagedUser() {
+        List<User> users = userRepository.findUsersByEngagement();
+        return users.isEmpty() ? null : users.get(users.size() - 1);
+    }
+
+    public List<User> getAllUsersByEngagementDesc() {
+        return userRepository.findUsersByEngagement();
     }
 
 }

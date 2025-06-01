@@ -13,5 +13,6 @@ public interface EventRepository extends JpaRepository<Event,Integer> {
     void deleteById(Integer eventId);
     @Query("SELECT COUNT(DISTINCT u.id) FROM Event e JOIN e.participants u")
     long countDistinctParticipants();
-
+    @Query("SELECT COUNT(u) FROM Event e JOIN e.participants u")
+    long countAllUserParticipations();
 }

@@ -22,4 +22,5 @@ public interface ActivityIService {
     public List<Activity> searchActivityByStartDate(LocalDate startDate);
     public void registerUserToActivity(int userId, int activityId, int eventId);
     public List<User> getUsersByActivity(int activityId);
+    public List<Activity> getActivitiesByEventId(int eventId);
 }

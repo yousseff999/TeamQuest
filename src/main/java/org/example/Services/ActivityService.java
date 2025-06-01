@@ -278,6 +278,8 @@ public class ActivityService implements ActivityIService{
                 .orElseThrow(() -> new RuntimeException("Activity not found"));
         return new ArrayList<>(activity.getUsers()); // Retourne la liste des utilisateurs
     }
-
+    public List<Activity> getActivitiesByEventId(int eventId) {
+        return activityRepository.findByEvent_EventId(eventId);
+    }
 }
 

@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Configuration
 @EnableWebMvc
@@ -29,6 +26,7 @@ public class UserRestController {
 
     private final UserIService userIService;
     UserService userService;
+    UserRepository userRepository;
     @PostMapping("/addUser")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
@@ -140,5 +138,23 @@ public class UserRestController {
     public long countAllUsers() {
         return userService.countAllUsers();
     }
+
+    @GetMapping("/most-engaged")
+    public ResponseEntity<User> getMostEngagedUser() {
+        User user = userService.getMostEngagedUser();
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/least-engaged")
+    public ResponseEntity<User> getLeastEngagedUser() {
+        User user = userService.getLeastEngagedUser();
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/engagement-ranking")
+    public ResponseEntity<List<User>> getEngagementRanking() {
+        return ResponseEntity.ok(userService.getAllUsersByEngagementDesc());
+    }
+
 
 }

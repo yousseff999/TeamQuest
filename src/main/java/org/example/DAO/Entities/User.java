@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
+import java.util.LinkedHashMap;
+import java.util.Map;
 @Getter
 @Setter
 @Entity
@@ -55,6 +56,9 @@ public class User implements UserDetails {
     @JsonIgnore
     List<Challenge> createdChallenges = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    List<EventInteraction> interactions = new ArrayList<>();
     // ✅ Challenges where this user is the opponent
     @OneToMany(mappedBy = "opponent")
     @JsonIgnore
@@ -107,4 +111,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;  // Allow account to be enabled
     }
+
+
 }

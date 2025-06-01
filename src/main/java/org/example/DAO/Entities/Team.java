@@ -34,9 +34,6 @@ public class Team {
     Set<User> members;
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rank> ranks = new ArrayList<>();
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Badge> badges = new ArrayList<>();
-
     // Automatically set the creation date when the team is created
     @PrePersist
     protected void onCreate() {
