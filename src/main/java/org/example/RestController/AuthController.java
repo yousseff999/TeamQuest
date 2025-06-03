@@ -10,6 +10,7 @@ import org.example.Services.AuthService;
 import org.example.Services.UserDetailsImpl;
 import org.example.config.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,10 +46,9 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        String jwt = jwtUtil.generateToken(userDetails.getUser());  // Use the User object instead of UserDetailsImpl
+        String jwt = jwtUtil.generateToken(userDetails.getUser());
 
         return ResponseEntity.ok(new LoginResponse(jwt, userDetails.getId(), userDetails.getRole()));
     }

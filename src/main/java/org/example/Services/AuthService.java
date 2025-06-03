@@ -112,7 +112,9 @@ public class AuthService {
         user.setUsername(name);
         user.setRole(Role.USER); // Default role
 
-        // Delegate to UserService to create user
         return userService.createUser(user);
     }
-}
+    }
+
+
+
