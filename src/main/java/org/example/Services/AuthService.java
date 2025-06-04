@@ -19,7 +19,7 @@ public class AuthService {
      UserRepository userRepository;
      UserService userService;
      EmailService emailService;
-
+    private static final int TOKEN_EXPIRATION_HOURS = 24;
      PasswordEncoder passwordEncoder;
     @Autowired
     public AuthService(UserRepository userRepository, EmailService emailService, PasswordEncoder passwordEncoder,@Lazy UserService userService) {
@@ -29,19 +29,20 @@ public class AuthService {
         this.userService = userService;
     }
 
-    // 1️⃣ Generate Reset Token and Send Email
+    @Transactional
     public void sendPasswordResetEmail(String email) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (!userOptional.isPresent()) {
-            throw new RuntimeException("Email non trouvé !");
-        }
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Email not found"));
 
-        User user = userOptional.get();
+        // Generate and set new token
         String resetToken = UUID.randomUUID().toString();
         user.setResetToken(resetToken);
-        user.setTokenExpirationTime(LocalDateTime.now().plusHours(1)); // Expiration après 1h
-        userRepository.save(user);
+        user.setTokenExpirationTime(LocalDateTime.now().plusHours(1));
 
+        // Save with explicit flush
+        userRepository.saveAndFlush(user);
+
+        // Send email - inline content creation
         String resetLink = "http://localhost:4200/reset-password?token=" + resetToken;
         String emailContent = "<p>Bonjour,</p>"
                 + "<p>Vous avez demandé une réinitialisation de votre mot de passe.</p>"
@@ -49,32 +50,26 @@ public class AuthService {
                 + "<p><a href='" + resetLink + "'>Réinitialiser mon mot de passe</a></p>"
                 + "<p>Ce lien expire dans 1 heure.</p>";
 
-        emailService.sendEmail(user.getEmail(), "Réinitialisation du mot de passe", emailContent);
+        emailService.sendEmail(user.getEmail(), "Password Reset", emailContent);
     }
 
-    // 2. Réinitialisation du mot de passe
     @Transactional
     public void resetPassword(String token, String newPassword) {
-        // 1. Find user by token
-        Optional<User> userOptional = userRepository.findByResetToken(token);
-        if (!userOptional.isPresent()) {
-            throw new RuntimeException("Token invalide !");
-        }
+        User user = userRepository.findByResetToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
 
-        User user = userOptional.get();
-
-        // 2. Verify token expiration
+        // Verify token expiration
         if (user.getTokenExpirationTime().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Token expiré !");
+            throw new RuntimeException("Token expired");
         }
 
-        // 3. Update password and clear reset fields
+        // Update password
         user.setPassword(passwordEncoder.encode(newPassword));
-        user.setResetToken(null);  // Clear the reset token
-        user.setTokenExpirationTime(null);  // Clear the expiration time
+        user.setResetToken(null);
+        user.setTokenExpirationTime(null);
 
-        // 4. Save changes
-        userRepository.save(user);
+        // Save with flush
+        userRepository.saveAndFlush(user);
     }
 
     public User signUp(String name, String email, String password, String confirmPassword) {
@@ -114,6 +109,8 @@ public class AuthService {
 
         return userService.createUser(user);
     }
+
+
     }
 
 

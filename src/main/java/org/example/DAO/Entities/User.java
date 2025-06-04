@@ -33,6 +33,7 @@ public class User implements UserDetails {
     String email;
     String password;
     int score_u;
+    @Column(name = "reset_token")
     String resetToken;
     LocalDateTime tokenExpirationTime;
     @CreationTimestamp
@@ -110,6 +111,16 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;  // Allow account to be enabled
+    }
+
+
+    // Add these new getters and setters
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
     }
 
 
