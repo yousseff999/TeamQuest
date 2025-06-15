@@ -15,7 +15,7 @@ public class PredictionController {
     }
 
     @PostMapping("/predict")
-    @CrossOrigin(origins = "http://localhost:4200") // Allow Angular frontend
+    @CrossOrigin(origins = "http://localhost:4200")
     public String predict(@RequestBody Map<String, Object> input) {
         return predictionService.predict(input);
     }
