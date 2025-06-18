@@ -5,7 +5,9 @@ import org.example.DAO.Entities.Team;
 import org.example.DAO.Entities.User;
 import org.example.DAO.Repositories.TeamRepository;
 import org.example.DAO.Repositories.UserRepository;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
@@ -14,7 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class TeamService implements TeamIService{
     TeamRepository teamRepository;
-    UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public Team createTeam(Team team) {
         // Ensure the team name is unique
@@ -61,7 +67,20 @@ public class TeamService implements TeamIService{
 
         user.setTeam(team); // Set the team for the user
         userRepository.save(user); // Save the updated user
+            List<User> teamMembers = userRepository.findByTeamId(teamId)
+                    .stream()
+                    .filter(u -> u.getId() != userId)
+                    .collect(Collectors.toList());
 
+            String subject = "Nouveau membre dans l'équipe " + team.getName();
+            String message = "<p>Bonjour,</p><p><strong>" + user.getUsername() +
+                    "</strong> a rejoint l'équipe <strong>" + team.getName() + "</strong>.</p>";
+
+            for (User member : teamMembers) {
+                if (member.getEmail() != null) {
+                    emailService.sendEmail(member.getEmail(), subject, message);
+                }
+            }
         return teamRepository.save(team); // Save the updated team
     }
 
@@ -72,11 +91,26 @@ public class TeamService implements TeamIService{
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (user.getTeam() != null && user.getTeam().getId() == teamId) {
-            user.setTeam(null); // Remove the team from the user
-            userRepository.save(user); // Save the updated user
+            user.setTeam(null);
+            userRepository.save(user);
+
+            List<User> teamMembers = userRepository.findByTeamId(teamId)
+                    .stream()
+                    .filter(u -> u.getId() != userId)
+                    .collect(Collectors.toList());
+
+            String subject = "Un membre a quitté l'équipe " + team.getName();
+            String message = "<p>Bonjour,</p><p><strong>" + user.getUsername() +
+                    "</strong> a quitté l'équipe <strong>" + team.getName() + "</strong>.</p>";
+
+            for (User member : teamMembers) {
+                if (member.getEmail() != null) {
+                    emailService.sendEmail(member.getEmail(), subject, message);
+                }
+            }
         }
 
-        return teamRepository.save(team); // Save the updated team
+        return teamRepository.save(team);
     }
 
     public List<Object[]> getAllTeamNamesAndScoresOrdered() {

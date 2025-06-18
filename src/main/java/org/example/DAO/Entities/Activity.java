@@ -34,6 +34,7 @@ public class Activity {
     @JsonIgnore
     @JoinColumn(name = "event_id")
      Event event;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "activity_participants",

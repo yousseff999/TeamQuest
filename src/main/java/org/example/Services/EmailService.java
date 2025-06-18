@@ -38,7 +38,7 @@ public class EmailService {
 
     @Autowired
     private ChallengeService challengeService;
-    @Value("${spring.mail.username}") // Pour récupérer l'email de l'expéditeur
+    @Value("${spring.mail.username}")
     private String fromEmail;
 
     public EmailService(JavaMailSender mailSender) {
