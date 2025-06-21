@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.DAO.Entities.*;
 import org.example.DAO.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 
 import javax.transaction.Transactional;
@@ -11,22 +12,34 @@ import java.util.List;
 import java.util.Random;
 
 @org.springframework.stereotype.Service
-@AllArgsConstructor
+
 public class ChallengeService implements ChallengeIService {
     @Autowired
     private UserRepository userRepository;
-    TeamRepository teamRepository;
-    DepartmentRepository departmentRepository;
+
+    @Autowired
+    private TeamRepository teamRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     @Autowired
     private QuestionRepository questionRepository;
-    ChallengeRepository challengeRepository;
+
     @Autowired
-    private Environment environment;
+    private ChallengeRepository challengeRepository;
+
     @Autowired
     private SubmissionRepository submissionRepository;
 
     @Autowired
     private BadgeRepository badgeRepository;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @Override
     public Challenge createChallenge(Challenge challenge, Integer creatorId, Integer opponentId) {
@@ -38,7 +51,18 @@ public class ChallengeService implements ChallengeIService {
         challenge.setCreator(creator);
         challenge.setOpponent(opponent);
 
-        return challengeRepository.save(challenge);
+        Challenge savedChallenge = challengeRepository.save(challenge);
+
+        // Send challenge email to opponent
+        String challengeLink = frontendUrl + "/questions?challengeId=" + savedChallenge.getId();
+        String emailContent = "<p>Hi " + opponent.getUsername() + ",</p>"
+                + "<p>You have been challenged by <strong>" + creator.getUsername() + "</strong>.</p>"
+                + "<p>Click the link below to view or accept the challenge:</p>"
+                + "<a href=\"" + challengeLink + "\">Accept Challenge</a>";
+
+        emailService.sendEmail(opponent.getEmail(), "You've been challenged!", emailContent);
+
+        return savedChallenge;
     }
 
 

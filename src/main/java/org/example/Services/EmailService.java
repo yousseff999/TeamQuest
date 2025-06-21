@@ -40,6 +40,7 @@ public class EmailService {
     private ChallengeService challengeService;
     @Value("${spring.mail.username}")
     private String fromEmail;
+    
 
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;

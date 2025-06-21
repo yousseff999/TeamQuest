@@ -33,4 +33,5 @@ public class ChatController {
         // Send the message to the specified user's queue
         messagingTemplate.convertAndSendToUser(username, "/queue/messages", message);
     }
+
 }

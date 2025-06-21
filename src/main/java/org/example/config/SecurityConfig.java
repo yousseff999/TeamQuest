@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .antMatchers("/Defi/**").permitAll()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/api/stats/**").permitAll()
-                .antMatchers("/ws/**", "/topic/**", "/app/**").permitAll()
+                .antMatchers("/ws/**", "/topic/**", "/app/**", "/user/**", "/queue/**").permitAll()
                 .anyRequest().authenticated()  // Secure other endpoints
                 .and()
                 .sessionManagement()
