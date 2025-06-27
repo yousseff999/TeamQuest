@@ -127,6 +127,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>org.example.Main</mainClass> <!-- ✅ Your real main class -->
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
