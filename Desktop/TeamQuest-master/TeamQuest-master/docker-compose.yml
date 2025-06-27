@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: youssef
       MYSQL_DATABASE: TeamQuest
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      # Remove MYSQL_ALLOW_EMPTY_PASSWORD if you keep root password
     ports:
       - "3307:3306"
     volumes:
@@ -43,6 +43,14 @@ services:
       - backend
     ports:
       - "4200:80"
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - "8083:8083"  # Access Adminer UI at http://localhost:8080 or http://192.168.56.10:8080
     networks:
       - app-network
 
