@@ -19,7 +19,7 @@ services:
     depends_on:
       - mysqldb
     build:
-      context: ./backend
+      context: .
     restart: on-failure
     ports:
       - "8086:8086"
@@ -41,7 +41,7 @@ services:
     depends_on:
       - backend
     build:
-      context: ./frontend
+      context: .
       dockerfile: Dockerfile
     ports:
       - "4200:80"
