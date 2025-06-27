@@ -1,0 +1,116 @@
+<div class="leaderboard-container">
+  <!-- Animated Background Elements -->
+  <div class="background-elements">
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+    <div class="floating-element element-3"></div>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Header -->
+    <div class="header-section">
+      <h1 class="main-title">🏆 LEADERBOARD 🏆</h1>
+      <p class="subtitle">Compete, Excel, and Rise to the Top!</p>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="leaderboard-grid">
+      <!-- User Rankings -->
+      <div class="ranking-section">
+        <div class="section-header">
+          <h2 class="section-title user-title">👤 Top Players</h2>
+        </div>
+        
+        <div class="ranking-list">
+          <div *ngFor="let user of userScores; let i = index" 
+               class="ranking-card" 
+               [ngClass]="getRankStyle(i)"
+               [style.animation-delay]="(i * 100) + 'ms'">
+            <div class="card-content">
+              <div class="rank-info">
+                <div class="rank-icon">{{ getRankIcon(i) }}</div>
+                <div class="player-info">
+                  <h3 class="player-name">{{ user[0] }}</h3>
+                  <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span class="status-text">Active Player</span>
+                  </div>
+                </div>
+              </div>
+              <div class="score-info">
+                <div class="score-value">{{ user[1] | number }}</div>
+                <div class="score-label">points</div>
+              </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-container">
+              <div class="progress-bar" 
+                   [style.width]="getProgressWidth(user[1], userScores) + '%'"
+                   [style.animation-delay]="(i * 200) + 'ms'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Rankings -->
+      <div class="ranking-section">
+        <div class="section-header">
+          <h2 class="section-title team-title">🚀 Top Teams</h2>
+        </div>
+        
+        <div class="ranking-list">
+          <div *ngFor="let team of teamScores; let i = index" 
+               class="ranking-card" 
+               [ngClass]="getRankStyle(i)"
+               [style.animation-delay]="(i * 100) + 'ms'">
+            <div class="card-content">
+              <div class="rank-info">
+                <div class="rank-icon">{{ getRankIcon(i) }}</div>
+                <div class="player-info">
+                  <h3 class="player-name">{{ team[0] }}</h3>
+                  <div class="status-indicator">
+                    <div class="status-dot team-dot"></div>
+                    <span class="status-text">Elite Team</span>
+                  </div>
+                </div>
+              </div>
+              <div class="score-info">
+                <div class="score-value">{{ team[1] | number }}</div>
+                <div class="score-label">points</div>
+              </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-container">
+              <div class="progress-bar" 
+                   [style.width]="getProgressWidth(team[1], teamScores) + '%'"
+                   [style.animation-delay]="(i * 200) + 'ms'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-section">
+      <div class="stat-card stat-card-1">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value">{{ userScores.length }}</div>
+        <div class="stat-label">Active Players</div>
+      </div>
+      
+      <div class="stat-card stat-card-2">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-value">{{ teamScores.length }}</div>
+        <div class="stat-label">Competing Teams</div>
+      </div>
+      
+      <div class="stat-card stat-card-3">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-value">{{ userScores[0][1] | number }}</div>
+        <div class="stat-label">Highest Score</div>
+      </div>
+    </div>
+  </div>
+</div>

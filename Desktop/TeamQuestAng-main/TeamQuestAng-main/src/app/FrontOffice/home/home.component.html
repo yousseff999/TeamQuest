@@ -1,0 +1,643 @@
+<body class="index-page">
+
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl position-relative d-flex align-items-center">
+  
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/FrontOffice/img/logo.png" alt=""> -->
+          <h1 class="sitename">TeamQuest</h1>
+        </a>
+  
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#" (click)="scrollTo('hero', $event)">Home</a></li>
+            <li><a href="#" (click)="scrollTo('services', $event)">Services</a></li>
+            <li><a routerLink="/games">Games</a></li>
+            <li><a routerLink="/rank">Classement</a></li>
+            <li><a href="#" (click)="scrollTo('portfolio', $event)">Portfolio</a></li>   
+            <li class="dropdown">
+              <a href="#" (click)="scrollTo('hero', $event)"><span>Team</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a routerLink="/myteam">My Team</a></li>
+                <li><a routerLink="/jointeam">All Teams</a></li>
+                <li><a routerLink="/teamcreation">Create Team</a></li>
+              </ul>
+            </li>
+            
+            <li class="dropdown"><a href="#" (click)="scrollTo('hero', $event)"><span>Upcoming Event</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a routerLink="/allevents">All events</a></li>
+                <li class="dropdown">
+  <a href="#"><span>Select event category</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+  <ul>
+    <li><a (click)="navigateToCategory('SPORTS')">Sport</a></li>
+    <li><a (click)="navigateToCategory('PARTY')">Party</a></li>
+    <li><a (click)="navigateToCategory('CAMPING')">Camping</a></li>
+    <li><a (click)="navigateToCategory('CULTURAL')">Culture</a></li>
+  </ul>
+</li>
+                <!-- <li><a href="#">Dropdown 2</a></li> -->
+              </ul>
+            </li>
+            <li><a href="#" (click)="scrollTo('contact', $event)">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+  
+       
+  
+      </div>
+    </header>
+  
+    <main class="main">
+  
+      <!-- Hero Section -->
+      <section id="hero" class="hero section dark-background">
+  
+        <img src="assets/FrontOffice/img/home.avif" alt="" data-aos="fade-in">
+  
+        <div class="container d-flex flex-column align-items-center">
+          <h2 data-aos="fade-up" data-aos-delay="100">BOOST YOUR TEAM SPIRIT</h2>
+          <p data-aos="fade-up" data-aos-delay="200">Join our challenges to improve teamwork and compete to build a stronger team.</p>
+          <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+            <a routerLink="/getstarted" class="btn-get-started">Get Started</a>
+            <a href="https://www.youtube.com/watch?v=DlJyzEGWYEE" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          </div>
+        </div>
+  
+      </section><!-- /Hero Section -->
+  
+      <!-- About Section -->
+      <!-- /About Section -->
+  
+    <!-- Stats Section -->
+<section id="stats" class="stats section dark-background relative">
+  <!-- Background Image Layer -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <img src="assets/FrontOffice/img/d.jpg" 
+         alt="Background" 
+         class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-black/30"></div> <!-- Optional overlay for better readability -->
+  </div>
+  
+  <!-- Original Content (unchanged) -->
+  <div class="container relative z-10" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-4">
+
+     <!-- Compact Centered Top Scorer Card -->
+<div class="card mx-auto max-w-md shadow-lg text-white hover:shadow-xl transition-shadow duration-300" 
+     style="background: linear-gradient(135deg, #235ab3 0%, #9b0948 100%); border-color: rgba(255,255,255,0.2);">
+  <div class="card-body flex flex-col items-center text-center p-4">
+    <!-- Animated Happy Avatar -->
+    <div class="img-wrapper w-32 h-32 flex justify-center items-center relative mb-4">
+      <div class="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-75" style="animation-delay: 0.5s"></div>
+      <img src="assets/BackOffice/img/happy.svg" 
+           alt="Top Scorer" 
+           class="w-24 h-24 animate-wiggle">
+    </div>            
+    
+    <!-- Info -->
+    <h1 class="text-lg font-bold text-white mb-1">Good Job, {{ topScorer?.username }}!</h1>
+    <p class="text-sm text-white/90 mb-4">Keep it up! You're setting the bar high!</p>
+
+    <div class="w-full p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+      <h2 class="text-md font-bold text-white flex items-center justify-center">
+        <span class="text-yellow-300 mr-2">🏆</span> 
+        Top Scorer
+      </h2>
+      <p class="text-sm font-medium mt-1">
+        {{ topScorer?.username }} — 
+        <span class="font-bold">Score: {{ topScorer?.score_u }}</span>
+      </p>
+    </div>
+  </div>
+
+        
+        <div class="alert alert-dark mx-auto max-w-md text-center bg-black/30 border-t border-white/20 rounded-lg p-2">
+  <div class="inline-flex items-center">
+    <span class="text-white/90">Follow the champion →</span>
+    <a target="_blank" href="https://twitter.com/MohamedSaid__" 
+       class="ml-2 text-white font-medium hover:text-yellow-200 transition-colors">
+      @{{ topScorer?.username }}
+    </a>
+  </div>
+</div>
+      </div><!-- End Stats Item -->
+
+      <!-- Animated Team Champion Card -->
+<div class="card mx-auto max-w-md shadow-lg text-white hover:shadow-xl transition-shadow duration-300" 
+     style="background: linear-gradient(135deg, #9f0145 0%, #2457a9 100%); border-color: rgba(255,255,255,0.2);">
+  <div class="card-body flex flex-col items-center text-center p-4">
+    <!-- Animated Team Avatar -->
+    <div class="img-wrapper w-32 h-32 flex justify-center items-center relative mb-4">
+      <!-- Pulsing halo effect -->
+      <div class="absolute inset-0 bg-purple-400/30 rounded-full animate-ping opacity-75" style="animation-delay: 0.3s"></div>
+      <!-- Floating animation container -->
+      <div class="relative animate-float">
+        <!-- Team logo with gradient border -->
+         <div class="relative bg-gradient-to-br from-purple-500 to-pink-600 p-1 rounded-full">
+          
+            <img src="assets/FrontOffice/img/teamchampp.png" 
+                 alt="Champion Team" 
+                 class="w-35 h-28 object-contain animate-wiggle-mild">
+          
+        </div>
+      </div>
+    </div>
+    <h1 class="text-lg font-bold text-white mb-1">Amazing Work, {{ topScoringTeam?.name }}! 👏</h1>
+    <p class="text-sm text-white/90 mb-4">Teamwork makes the dream work! You're dominating the competition!</p>
+    <!-- Team Info -->
+    <h1 class="text-xl font-bold text-white mb-1">{{ topScoringTeam?.name }}🏆</h1>
+    
+
+    <div class="w-full p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+      <div class="flex items-center justify-center space-x-4">
+        <div>
+          <p class="text-sm font-medium">
+            <i class="fas fa-trophy text-yellow-300 mr-1"></i>
+            Score: <span class="font-bold">{{ topScoringTeam?.score_t }}</span>
+          </p>
+        </div>
+        <div class="h-5 w-px bg-white/40"></div>
+        <div>
+          <p class="text-xs font-medium">
+            <i class="far fa-calendar-alt mr-1"></i>
+            {{ topScoringTeam?.creationDate | date:'yyyy' }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section><!-- /Stats Section -->
+
+<style>
+  @keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes wiggle-mild {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-wiggle-mild {
+  animation: wiggle-mild 4s ease-in-out infinite;
+}
+  /* Happy.svg Animation */
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+  .animate-wiggle {
+    animation: wiggle 1.5s ease-in-out infinite;
+  }
+
+  /* Pulsing glow for team card */
+  @keyframes pulse {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 0.4; }
+  }
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>
+  
+      <!-- Services Section -->
+<section id="services" class="services section relative">
+  <!-- Background Image Layer -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <img src="assets/FrontOffice/img/c.jpg" 
+         alt="Services Background" 
+         class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-black/20"></div> <!-- Optional overlay -->
+  </div>
+  
+  <!-- Original Content (unchanged) -->
+ <div class="container section-title relative z-10" data-aos="fade-up">
+  <h2 style="color: white;">Services</h2>
+  <p style="color: white;">Featured Services<br></p>
+</div>
+
+  <div class="container relative z-10" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-5">
+      <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+        <div class="service-item">
+          <div class="img">
+            <img src="assets/FrontOffice/img/challenges.png" class="img-fluid" alt="">
+          </div>
+          <div class="details position-relative">
+            <div class="icon">
+              <i class="bi bi-puzzle"></i>
+            </div>
+            <a href="service-details.html" class="stretched-link">
+              <h3>challenges</h3>
+            </a>
+            <p>A quiet duel between creativity's daring and knowledge's discipline every move a balance of instinct and insight.</p>
+          </div>
+        </div>
+      </div><!-- End Service Item -->
+
+      <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+        <div class="service-item">
+          <div class="img">
+            <img src="assets/FrontOffice/img/games.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="details position-relative">
+            <div class="icon">
+              <i class="bi bi-controller"></i>
+            </div>
+            <a href="service-details.html" class="stretched-link">
+              <h3>gaming</h3>
+            </a>
+            <p>A sandbox moment where fun took the controller, the rules glitched delightfully, and every step felt like unlocking a hidden level of creativity.</p>
+          </div>
+        </div>
+      </div><!-- End Service Item -->
+
+      <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+        <div class="service-item">
+          <div class="img">
+            <img src="assets/FrontOffice/img/events.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="details position-relative">
+            <div class="icon">
+              <i class="bi bi-balloon"></i>
+            </div>
+            <a href="service-details.html" class="stretched-link">
+              <h3>Events</h3>
+            </a>
+            <p>Special events where inspiration didn't just shine it took the spotlight and had some fun with it, turning every moment into a whirlwind of imagination and joy.</p>
+          </div>
+        </div>
+      </div><!-- End Service Item -->
+    </div>
+  </div>
+</section><!-- /Services Section -->
+  
+      <!-- Clients Section -->
+      <section id="clients" class="clients section light-background">
+  
+        <div class="container" data-aos="fade-up">
+  
+          <div class="row gy-4">
+  
+            <div class="col-xl-2 col-md-8 col-8 client-logo">
+              <img src="assets/FrontOffice/img/awss.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+  
+            <div class="col-xl-2 col-md-3 col-6 client-logo">
+              <img src="assets/FrontOffice/img/redhat.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+  
+            <div class="col-xl-2 col-md-3 col-6 client-logo">
+              <img src="assets/FrontOffice/img/IBM.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+  
+            <div class="col-xl-2 col-md-3 col-6 client-logo">
+              <img src="assets/FrontOffice/img/pegagold.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+  
+            <div class="col-xl-2 col-md-3 col-6 client-logo">
+              <img src="assets/FrontOffice/img/Dassault.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+  
+            <div class="col-xl-2 col-md-3 col-6 client-logo">
+              <img src="assets/FrontOffice/img/microsoft.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+  
+          </div>
+  
+        </div>
+  
+      </section><!-- /Clients Section -->
+  
+     
+  
+     <!-- Services 2 Section with Background -->
+<section
+  id="services-2"
+  class="services-2 section light-background"
+  style="background-image: url('assets/FrontOffice/img/rvd.png'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;"
+>
+
+  <!-- Non-blocking dark overlay -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+              background-color: rgba(0, 0, 0, 0.4); z-index: 1; pointer-events: none;">
+  </div>
+
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up" style="position: relative; z-index: 2;">
+    <h2 style="color: white;">Gift Card Store</h2>
+    <p style="color: white;">Exchange your points for rewards<br></p>
+  </div>
+
+  <!-- Section Content -->
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="row gy-4">
+
+      <!-- User Score Display -->
+      <div *ngIf="userId" class="user-info-section">
+        <div class="user-score-card">
+          <h3>🎁 Gift Card Store</h3>
+          <div class="score-display">
+            <span class="score-label">Your Current Score:</span>
+            <span class="score-value">{{ currentUserScore }} pts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gift Cards Section -->
+      <div *ngIf="userId" class="gift-cards-section">
+
+        <!-- Loading indicator -->
+        <div *ngIf="loadingGiftCards" class="loading-indicator">
+          <div class="spinner"></div>
+          <p>Loading gift cards...</p>
+        </div>
+
+        <!-- Gift Cards Grid -->
+        <div *ngIf="!loadingGiftCards && giftCards.length > 0" class="gift-cards-grid">
+          <div 
+            *ngFor="let card of giftCards" 
+            class="gift-card"
+            [class.affordable]="card.canAfford"
+            [class.owned]="card.alreadyOwned"
+            [class.locked]="!card.canAfford"
+          >
+            <!-- Card Image -->
+            <div class="card-image">
+              <img [src]="card.imageUrl" [alt]="card.title" />
+              <div *ngIf="card.alreadyOwned" class="owned-badge">✓ Owned</div>
+              <div *ngIf="!card.canAfford" class="locked-badge">🔒 Locked</div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="card-content">
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.description }}</p>
+
+              <div class="card-info">
+                <span class="brand">{{ card.brand }}</span>
+                <span class="category">{{ card.category }}</span>
+              </div>
+
+              <div class="score-info">
+                <span>Required Score:</span>
+                <span class="score" [class.affordable-score]="card.canAfford">
+                  {{ card.requiredScore }} pts
+                </span>
+              </div>
+
+              <!-- Exchange Button -->
+              <button 
+                class="exchange-btn"
+                [disabled]="!card.canAfford || card.alreadyOwned || loading"
+                (click)="exchangeGiftCard(card)"
+              >
+                <span *ngIf="card.alreadyOwned">✓ Already Owned</span>
+                <span *ngIf="!card.canAfford && !card.alreadyOwned">🔒 Insufficient Score</span>
+                <span *ngIf="card.canAfford && !card.alreadyOwned">🎁 Exchange Now</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- No gift cards message -->
+        <div *ngIf="!loadingGiftCards && giftCards.length === 0" class="no-cards">
+          <h3>No gift cards available</h3>
+          <p>Check back later for new rewards!</p>
+        </div>
+      </div>
+
+      <!-- Processing overlay -->
+      <div *ngIf="loading" class="loading-overlay">
+        <div class="loading-content">
+          <div class="spinner"></div>
+          <p>Processing exchange...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+      
+  
+    <!-- Portfolio Section -->
+<section id="portfolio" class="portfolio section" style="background-image: url('assets/FrontOffice/img/rvd.png'); background-size: cover; background-position: center;">
+
+  <!-- Section Title -->
+  <div class="container section-title py-3" data-aos="fade-up">
+    <h2 style="color: white;">Portfolio</h2>
+    <p style="color: white;">CHECK OUR PORTFOLIO<br></p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+
+    <div class="layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+      <div class="row gy-4 container" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Loop through portfolios -->
+        <div 
+          class="col-lg-3 col-md-6   portfolio-item item filter-app"
+          
+          *ngFor="let portfolio of portfolios">
+          
+          <div class="portfolio-content h-300">
+            <img 
+              *ngIf="imageUrls[portfolio.idPortfolio]" 
+              [src]="imageUrls[portfolio.idPortfolio]" 
+              class="img-fluid" 
+              alt="Portfolio Image">
+
+            <div class="portfolio-info">
+              <h4>{{ portfolio.title }}</h4>
+              <p>{{ portfolio.description }}</p>
+              <a 
+                *ngIf="imageUrls[portfolio.idPortfolio]" 
+                [href]="imageUrls[portfolio.idPortfolio]" 
+                [title]="portfolio.title" 
+                data-gallery="portfolio-gallery-app" 
+                class="glightbox preview-link">
+                <i class="bi bi-zoom-in"></i>
+              </a>
+              <a 
+                [routerLink]="['/portfolio-details', portfolio.idPortfolio]" 
+                title="More Details" 
+                class="details-link">
+                <i class="bi bi-link-45deg"></i>
+              </a>
+            </div>
+          
+        </div>
+        </div><!-- End Portfolio Item -->
+
+      </div><!-- End isotope-container -->
+
+    </div>
+
+  </div>
+
+</section><!-- /Portfolio Section -->
+
+
+  
+     
+  
+      <!-- Contact Section -->
+      <section id="contact" class="contact section" style="background-image: url('assets/FrontOffice/img/ff.jpg'); background-size: cover; background-position: center;">
+  
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2 style="color: white;">Contact</h2>
+          <p style="color: white;">Share your feedback now<br></p>
+        </div><!-- End Section Title -->
+  
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+  
+          <div class="row gy-4">
+            <div class="col-lg-6 ">
+              <div class="row gy-4">
+  
+                <div class="col-lg-12">
+                  <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                    <i class="bi bi-geo-alt"></i>
+                    <h3>Address</h3>
+                    <p>Immeuble Les Pins, Bloc B, Lotissement Zone VI Lac II 1053, Tunis 1053</p>
+                  </div>
+                </div><!-- End Info Item -->
+  
+                <div class="col-md-6">
+                  <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                    <i class="bi bi-telephone"></i>
+                    <h3>Call Us</h3>
+                    <p> 71 167 300</p>
+                  </div>
+                </div><!-- End Info Item -->
+  
+                <div class="col-md-6">
+                  <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+                    <i class="bi bi-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>youssef.zammit@soprahr.com</p>
+                  </div>
+                </div><!-- End Info Item -->
+  
+              </div>
+            </div>
+  
+            <div class="col-lg-6">
+              <form (ngSubmit)="sendMessage()" #contactForm="ngForm" class="php-email-form" data-aos="fade-up" data-aos-delay="500">
+  <div class="row gy-4">
+    
+    <div class="col-md-6">
+      <input type="text" name="name" class="form-control" placeholder="Your Name" [(ngModel)]="contact.name" required>
+    </div>
+
+    <div class="col-md-6">
+      <input type="email" name="email" class="form-control" placeholder="Your Email" [(ngModel)]="contact.email" required>
+    </div>
+
+    <div class="col-md-12">
+      <input type="text" name="subject" class="form-control" placeholder="Subject" [(ngModel)]="contact.subject" required>
+    </div>
+
+    <div class="col-md-12">
+      <textarea name="message" class="form-control" rows="4" placeholder="Message" [(ngModel)]="contact.message" required></textarea>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <div *ngIf="loading">Loading...</div>
+      <div *ngIf="errorMessage" class="error-message text-danger">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="sent-message text-success">{{ successMessage }}</div>
+
+      <button type="submit" [disabled]="loading">Send Message</button>
+    </div>
+
+  </div>
+</form>
+            </div><!-- End Contact Form -->
+  
+          </div>
+  
+        </div>
+  
+      </section><!-- /Contact Section -->
+  
+    </main>
+  
+    <footer id="footer" class="footer dark-background" style="background-image: url('assets/FrontOffice/img/d.jpg'); background-size: cover; background-position: center;"  >
+  
+      <div class="container footer-top">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <span class="sitename">Dewi</span>
+            </a>
+            <div class="footer-contact pt-3">
+              <p>A108 Adam Street</p>
+              <p>New York, NY 535022</p>
+              <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+              <p><strong>Email:</strong> <span>info@example.com</span></p>
+            </div>
+            <div class="social-links d-flex mt-4">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+  
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+  
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+  
+          <div class="col-lg-4 col-md-12 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+            <form action="forms/newsletter.php" method="post" class="php-email-form">
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+            </form>
+          </div>
+  
+        </div>
+      </div>
+  
+      <div class="container copyright text-center mt-4">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Dewi</strong> <span>All Rights Reserved</span></p>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+        </div>
+      </div>
+  
+    </footer>

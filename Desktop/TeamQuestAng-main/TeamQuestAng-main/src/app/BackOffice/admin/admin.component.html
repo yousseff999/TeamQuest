@@ -1,0 +1,990 @@
+<body class="bg-gray-100">
+
+
+    <!-- start navbar -->
+    <div class="md:fixed md:w-full md:top-0 md:z-20 flex flex-row flex-wrap items-center bg-white p-6 border-b border-gray-300">
+        
+        <!-- logo -->
+        <div class="flex-none w-56 flex flex-row items-center">
+          <img src="assets/BackOffice/img/logo.png" class="w-10 flex-none">
+          <strong class="capitalize ml-1 flex-1">TeamQuest</strong>
+    
+          <button id="sliderBtn" class="flex-none text-right text-gray-900 hidden md:block">
+            <i class="fad fa-list-ul"></i>
+          </button>
+        </div>
+        <!-- end logo -->   
+        
+        <!-- navbar content toggle -->
+        <button id="navbarToggle" class="hidden md:block md:fixed right-0 mr-6">
+          <i class="fad fa-chevron-double-down"></i>
+        </button>
+        <!-- end navbar content toggle -->
+    
+        <!-- navbar content -->
+        <div id="navbar" class="animated md:hidden md:fixed md:top-0 md:w-full md:left-0 md:mt-16 md:border-t md:border-b md:border-gray-200 md:p-10 md:bg-white flex-1 pl-3 flex flex-row flex-wrap justify-between items-center md:flex-col md:items-center">
+          <!-- left -->
+          <div class="text-gray-600 md:w-full md:flex md:flex-row md:justify-evenly md:pb-10 md:mb-10 md:border-b md:border-gray-200">
+            <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class=""></i></a>        
+            <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class=""></i></a>        
+            <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class=""></i></a>        
+            <a class="mr-2 transition duration-500 ease-in-out hover:text-gray-900" href="#" title="email"><i class=""></i></a>        
+          </div>
+          <!-- end left -->      
+    
+          <!-- right -->
+          <div class="flex flex-row-reverse items-center"> 
+    
+            <!-- user -->
+<div class="dropdown relative md:static">
+
+  <!-- Button to open dropdown -->
+  <button (click)="toggledropdown()" class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
+    <div class="w-8 h-8 overflow-hidden rounded-full">
+      <img class="w-full h-full object-cover" src="assets/BackOffice/img/user.svg">
+    </div> 
+
+    <div class="ml-2 capitalize flex">
+      <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">Youssef</h1>
+      <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
+    </div>                        
+  </button>
+
+  <!-- Background overlay to close dropdown -->
+  <button *ngIf="dropdownopen" class="fixed top-0 left-0 z-10 w-full h-full" (click)="toggledropdown()"></button>
+
+  <!-- Dropdown content -->
+  <div class="text-gray-500 menu rounded bg-white shadow-md absolute z-20 right-0 w-40 mt-5 py-2 animated faster"
+       [ngClass]="{'hidden': !dropdownopen, 'block': dropdownopen}">
+    
+    <hr>
+    <button (click)="logout()" class="px-4 py-2 w-full text-left capitalize font-medium text-sm tracking-wide hover:bg-gray-200">
+      <i class="fad fa-sign-out-alt text-xs mr-1"></i> Log out
+    </button>
+  </div>
+</div>
+<!-- end user -->
+
+    
+            <!-- notifcation -->
+            <div class="dropdown relative mr-5 md:static">
+    
+              <button class="text-gray-500 menu-btn p-0 m-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none transition-all ease-in-out duration-300">
+                <i class="fad fa-bells"></i>               
+              </button>
+    
+              <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
+    
+              <div class="menu hidden rounded bg-white md:right-0 md:w-full shadow-md absolute z-20 right-0 w-84 mt-5 py-2 animated faster">
+                <!-- top -->
+                <div class="px-4 py-2 flex flex-row justify-between items-center capitalize font-semibold text-sm">
+                  <h1>notifications</h1>
+                  <div class="bg-teal-100 border border-teal-200 text-teal-500 text-xs rounded px-1">
+                    <strong>5</strong>
+                  </div>
+                </div>
+                <hr>
+                <!-- end top -->
+    
+                <!-- body -->
+    
+                <!-- item -->
+                <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+    
+                  <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                    <i class="fad fa-birthday-cake text-sm"></i>
+                  </div>
+    
+                  <div class="flex-1 flex flex-rowbg-green-100">
+                    <div class="flex-1">
+                      <h1 class="text-sm font-semibold">poll..</h1>
+                      <p class="text-xs text-gray-500">text here also</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      <p>4 min ago</p>
+                    </div>
+                  </div>
+    
+                </a>
+                <hr>
+                <!-- end item -->
+    
+                <!-- item -->
+                <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+    
+                  <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                    <i class="fad fa-user-circle text-sm"></i>
+                  </div>
+    
+                  <div class="flex-1 flex flex-rowbg-green-100">
+                    <div class="flex-1">
+                      <h1 class="text-sm font-semibold">mohamed..</h1>
+                      <p class="text-xs text-gray-500">text here also</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      <p>78 min ago</p>
+                    </div>
+                  </div>
+    
+                </a>
+                <hr>
+                <!-- end item -->
+    
+                <!-- item -->
+                <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+    
+                  <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                    <i class="fad fa-images text-sm"></i>
+                  </div>
+    
+                  <div class="flex-1 flex flex-rowbg-green-100">
+                    <div class="flex-1">
+                      <h1 class="text-sm font-semibold">new imag..</h1>
+                      <p class="text-xs text-gray-500">text here also</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      <p>65 min ago</p>
+                    </div>
+                  </div>
+    
+                </a>
+                <hr>
+                <!-- end item -->
+    
+                <!-- item -->
+                <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+    
+                  <div class="px-3 py-2 rounded mr-3 bg-gray-100 border border-gray-300">
+                    <i class="fad fa-alarm-exclamation text-sm"></i>
+                  </div>
+    
+                  <div class="flex-1 flex flex-rowbg-green-100">
+                    <div class="flex-1">
+                      <h1 class="text-sm font-semibold">time is up..</h1>
+                      <p class="text-xs text-gray-500">text here also</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      <p>1 min ago</p>
+                    </div>
+                  </div>
+    
+                </a>
+                <!-- end item -->
+    
+    
+                <!-- end body -->
+    
+                <!-- bottom -->
+                <hr>
+                <div class="px-4 py-2 mt-2">
+                  <a href="#" class="border border-gray-300 block text-center text-xs uppercase rounded p-1 hover:text-teal-500 transition-all ease-in-out duration-500">
+                    view all
+                  </a>
+                </div>
+                <!-- end bottom -->            
+              </div>
+            </div>
+            <!-- end notifcation -->
+    
+            <!-- messages -->
+            <div class="dropdown relative mr-5 md:static">
+    
+              <button class="text-gray-500 menu-btn p-0 m-0 hover:text-gray-900 focus:text-gray-900 focus:outline-none transition-all ease-in-out duration-300">
+                <i class="fad fa-comments"></i>               
+              </button>
+    
+              <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
+    
+              <div class="menu hidden md:w-full md:right-0 rounded bg-white shadow-md absolute z-20 right-0 w-84 mt-5 py-2 animated faster">
+                <!-- top -->
+                <div class="px-4 py-2 flex flex-row justify-between items-center capitalize font-semibold text-sm">
+                  <h1>messages</h1>
+                  <div class="bg-teal-100 border border-teal-200 text-teal-500 text-xs rounded px-1">
+                    <strong>3</strong>
+                  </div>
+                </div>
+                <hr>
+                <!-- end top -->
+    
+                <!-- body -->
+    
+                <!-- item -->
+                <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+    
+                  <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                    <img class="w-full h-full object-cover" src="assets/BackOffice/img/user1.jpg" alt="">
+                  </div>
+    
+                  <div class="flex-1 flex flex-rowbg-green-100">
+                    <div class="flex-1">
+                      <h1 class="text-sm font-semibold">mohamed said</h1>
+                      <p class="text-xs text-gray-500">yeah i know</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      <p>4 min ago</p>
+                    </div>
+                  </div>
+    
+                </a>
+                <hr>
+                <!-- end item --> 
+    
+                <!-- item -->
+                <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+    
+                  <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                    <img class="w-full h-full object-cover" src="assets/BackOffice/img/user2.jpg" alt="">
+                  </div>
+    
+                  <div class="flex-1 flex flex-rowbg-green-100">
+                    <div class="flex-1">
+                      <h1 class="text-sm font-semibold">sull goldmen</h1>
+                      <p class="text-xs text-gray-500">for sure</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      <p>1 day ago</p>
+                    </div>
+                  </div>
+    
+                </a>
+                <hr>
+                <!-- end item -->
+    
+                <!-- item -->
+                <a class="flex flex-row items-center justify-start px-4 py-4 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 transition-all duration-300 ease-in-out" href="#">
+    
+                  <div class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
+                    <img class="w-full h-full object-cover" src="assets/BackOffice/img/user3.jpg" alt="">
+                  </div>
+    
+                  <div class="flex-1 flex flex-rowbg-green-100">
+                    <div class="flex-1">
+                      <h1 class="text-sm font-semibold">mick</h1>
+                      <p class="text-xs text-gray-500">is typing ....</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      <p>31 feb</p>
+                    </div>
+                  </div>
+    
+                </a>
+                <!-- end item -->
+    
+    
+                <!-- end body -->
+    
+                <!-- bottom -->
+                <hr>
+                <div class="px-4 py-2 mt-2">
+                  <a href="#" class="border border-gray-300 block text-center text-xs uppercase rounded p-1 hover:text-teal-500 transition-all ease-in-out duration-500">
+                    view all
+                  </a>
+                </div>
+                <!-- end bottom -->            
+              </div>
+            </div>
+            <!-- end messages -->               
+    
+    
+          </div>
+          <!-- end right -->
+        </div>
+        <!-- end navbar content -->
+    
+      </div>
+    <!-- end navbar -->
+    
+    
+    <!-- strat wrapper -->
+    <div class="h-screen flex flex-row flex-wrap">
+      
+        <!-- start sidebar -->
+      <div id="sideBar" class="relative flex flex-col flex-wrap bg-white border-r border-gray-300 p-6 flex-none w-64 md:-ml-64 md:fixed md:top-0 md:z-30 md:h-screen md:shadow-xl animated faster">
+        
+    
+        <!-- sidebar content -->
+        <div class="flex flex-col">
+    
+          <!-- sidebar toggle -->
+          <div class="text-right hidden md:block mb-4">
+            <button id="sideBarHideBtn">
+              <i class="fad fa-times-circle"></i>
+            </button>
+          </div>
+          <!-- end sidebar toggle -->
+    
+          <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">homes</p>
+    
+          
+    <!-- link -->   
+    <div class="relative mb-3">
+  <!-- Main Events Button -->
+  <button class="flex items-center capitalize font-medium text-sm text-gray-600 hover:text-teal-600 transition ease-in-out duration-500 w-full text-left"
+          (click)="toggleDropdown()">
+    <i class="fad fa-calendar-alt text-xs mr-2"></i>
+    Events
+    <i class="fad fa-chevron-down text-xs ml-auto" [ngClass]="{'rotate-180': dropdownOpen}"></i>
+  </button>
+
+  <!-- Main Dropdown -->
+  <div *ngIf="dropdownOpen" class="absolute left-0 mt-2 w-52 bg-white rounded-lg shadow-md z-20">
+    <a routerLink="/showevent" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-teal-600 transition">All Events</a>
+    <a routerLink="/allactivities" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-teal-600 transition">All Activities</a>
+
+    <!-- Category Events Button -->
+    <div class="relative">
+      <button (click)="toggleSubDropdown($event)"
+              class="w-full text-left block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-teal-600 transition">
+        Category Events
+        <i class="fad fa-chevron-right text-xs float-right mt-1"></i>
+      </button>
+
+      <!-- Category Submenu -->
+      <div *ngIf="subDropdownOpen" class="absolute left-full top-0 mt-0 w-48 bg-white rounded-md shadow-md z-30">
+        <a *ngFor="let type of eventTypes"
+           [routerLink]="['/eventcategory', type]"
+           (click)="closeDropdown()"
+           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-indigo-600 transition">
+          {{ type }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- link -->
+    <a routerLink="/allusers" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+      <i class="fad fa-users text-xs mr-2"></i>         
+      Users
+    </a>
+    <!-- end link -->
+     <!-- link -->
+     <a routerLink="/allteams" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+      <i class="fas fa-users text-xs mr-2"></i>         
+      Teams
+    </a>
+    <!-- end link -->
+     <!-- link -->
+<a routerLink="/alldepartments" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+  <i class="fas fa-building text-xs mr-2"></i>         
+  Departments
+</a>
+<!-- end link -->
+ <a routerLink="/createdefi" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+  <i class="fas fa-bolt text-xs mr-2"></i>         
+  Defi
+</a>
+<!-- end link -->
+
+          <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p>
+    
+          <!-- link -->
+          <a href="https://mail.google.com/mail/u/0/?pli=1#inbox" target="_blank" rel="noopener noreferrer"
+   class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+  <i class="fad fa-envelope-open-text text-xs mr-2"></i>
+  email
+</a>
+
+          <!-- end link -->
+    
+          <!-- link -->
+          <a href="msteams:" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+  <i class="fad fa-comments text-xs mr-2"></i>
+  chat
+</a>
+
+          <!-- end link -->
+    
+          <!-- link -->
+          <a href="https://trello.com" target="_blank" 
+   class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+  <i class="fad fa-shield-check text-xs mr-2"></i>
+  todo
+</a>
+
+          <!-- end link -->
+    
+          <!-- link -->
+          <a href="https://calendar.google.com" target="_blank" 
+   class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+  <i class="fad fa-calendar-edit text-xs mr-2"></i>
+  calendar
+</a>
+
+          <!-- end link -->
+    
+         
+          
+          
+         
+          
+          
+    
+        </div>
+        <!-- end sidebar content -->
+    
+      </div>
+      <!-- end sidbar -->
+    
+      <!-- strat content -->
+      <div class="bg-gray-100 flex-1 p-6 md:mt-16"> 
+    
+        
+        <!-- General Report -->
+        <div class="grid grid-cols-4 gap-6 xl:grid-cols-1">
+    
+    
+        <!-- card -->
+        <div class="report-card">
+            <div class="card">
+                <div class="card-body flex flex-col">
+                    
+                    <!-- top -->
+                   <div class="flex flex-row justify-between items-center">
+  <div class="h6 text-indigo-700 fad fa-users"></div>
+  <span 
+    class="rounded-full text-white badge text-xs"
+    [ngClass]="monthlyGrowth >= 0 ? 'bg-teal-400' : 'bg-red-500'"
+  >
+    {{ monthlyGrowth }}%
+    <i 
+      class="fal ml-1" 
+      [ngClass]="monthlyGrowth >= 0 ? 'fa-chevron-up' : 'fa-chevron-down'"
+    ></i>
+  </span>
+</div>
+
+
+                    <!-- end top -->
+    
+                    <!-- bottom -->
+                  <div class="mt-8 flex items-center space-x-2">
+  <p class="text-sm text-gray-400">Total users:</p>
+  <h1 class="text-3xl font-extrabold text-gray-600 bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    {{ totalUsers }}
+  </h1>
+</div>
+
+                    <!-- end bottom -->
+        
+                </div>
+            </div>
+            <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+        </div>
+        <!-- end card -->
+    
+    
+        <!-- card -->
+<div class="report-card">
+  <div class="card">
+    <div class="card-body flex flex-col">
+      
+      <!-- top -->
+      <div class="flex flex-row justify-between items-center">
+        <div class="h6 text-red-700 fad fa-user-friends"></div>
+        <span 
+          class="rounded-full text-white badge text-xs"
+          [ngClass]="weeklyPercentageChange >= 0 ? 'bg-teal-400' : 'bg-red-500'"
+        >
+          {{ weeklyPercentageChange | number:'1.0-2' }}%
+          <i 
+            class="fal ml-1"
+            [ngClass]="weeklyPercentageChange >= 0 ? 'fa-chevron-up' : 'fa-chevron-down'"
+          ></i>
+        </span>
+      </div>
+      <!-- end top -->
+
+      <!-- bottom -->
+      <div class="mt-8 flex items-center space-x-2">
+        <p class="text-sm text-gray-400">Total teams:</p>
+        <h1 class="text-3xl font-extrabold text-gray-600 bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+          {{ totalTeams }}
+        </h1>
+      </div>
+      <!-- end bottom -->
+
+    </div>
+  </div>
+  <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+</div>
+<!-- end card -->
+
+    
+    
+          <!-- card -->
+<div class="report-card">
+  <div class="card">
+    <div class="card-body flex flex-col">
+
+      <!-- top -->
+      <div class="flex flex-row justify-between items-center">
+        <div class="h6 text-yellow-600 fad fa-building"></div>
+        <span 
+          class="rounded-full text-white badge text-xs bg-teal-400"
+        >
+          +0%
+          <i class="fal fa-chevron-up ml-1"></i>
+        </span>
+      </div>
+      <!-- end top -->
+
+      <!-- bottom -->
+      <div class="mt-8 flex items-center space-x-2">
+        <p class="text-sm text-gray-400">Total departments:</p>
+        <h1 class="text-3xl font-extrabold text-gray-600 bg-clip-text bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500">
+          {{ totalDepartments }}
+        </h1>
+      </div>
+      <!-- end bottom -->
+
+    </div>
+  </div>
+  <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+</div>
+<!-- end card -->
+
+    
+    
+        <!-- card -->
+<div class="report-card">
+  <div class="card">
+    <div class="card-body flex flex-col">
+
+      <!-- top -->
+      <div class="flex flex-row justify-between items-center">
+        <div class="h6 text-green-700 fad fa-user-check"></div>
+        <span class="rounded-full text-white badge bg-green-400 text-xs">
+          +0%
+          <i class="fal fa-chevron-up ml-1"></i>
+        </span>
+      </div>
+      <!-- end top -->
+
+      <!-- bottom -->
+      <div class="mt-8 flex items-center space-x-2">
+        <p class="text-sm text-gray-400">Users Events participation:</p>
+        <h1 class="text-3xl font-extrabold text-gray-600 bg-clip-text bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500">
+          {{ totalAllEventParticipations }}
+        </h1>
+      </div>
+      <!-- end bottom -->
+
+    </div>
+  </div>
+  <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+</div>
+<!-- end card -->
+
+        
+    
+    </div>
+        <!-- End General Report -->
+    
+        <!-- strat Analytics -->
+        <div class="mt-6 grid grid-cols-2 gap-6 xl:grid-cols-1">
+    
+        <!-- update section -->
+        <div class="card bg-teal-400 border-teal-400 shadow-md text-white">
+            <div class="card-body flex flex-row">
+                
+                <!-- image -->
+                <div class="img-wrapper w-40 h-40 flex justify-center items-center">
+                    <img src="assets/BackOffice/img/happy.svg" alt="img title">
+                </div>
+                <!-- end image -->
+    
+                <!-- info -->
+                <div class="py-2 ml-10">
+<h1 class="h6 text-black">Good Job, {{ topScorer?.username }}!</h1>
+  <p class="text-black text-xs">Keep it up! You're setting the bar high for everyone else!</p>
+
+
+  <div class="p-4 bg-gray-100 rounded mt-4" *ngIf="topScorer">
+    <h2 class="text-lg font-semibold text-black">🏆 Top Scorer</h2>
+    <p class="text-black"> {{ topScorer.username }} — Score: {{ topScorer.score_u }}</p>
+  </div>
+</div>
+
+                <!-- end info -->
+    
+            </div>
+        </div>
+        <!-- end update section -->
+    
+        <!-- carts -->
+        <div class="flex flex-col">
+    
+            <!-- alert -->
+            <div class="alert alert-dark mb-6">
+                Hi! Wait A Minute . . . . . . Follow Me On Twitter 
+                <a class="ml-2" target="_blank" href="https://twitter.com/MohamedSaid__">@{{ topScorer?.username }}</a>
+            </div>
+            <!-- end alert -->
+    
+            <!-- Top Scorer Team Card -->
+<div class="card col-span-2">
+  <div class="py-3 px-4 flex flex-row justify-between">
+    <h1 class="h6">
+      <span class="text-xl font-bold text-gray-700">{{ topScoringTeam?.name }}</span>
+      <p class="text-sm text-gray-400">Top Scorer Team</p>
+      <p class="text-sm text-blue-500">Score: <strong>{{ topScoringTeam?.score_t }}</strong></p>
+    </h1>
+
+    <div class="bg-red-200 text-red-700 border-red-300 border w-10 h-10 rounded-full flex justify-center items-center">
+      <i class="fad fa-trophy-alt text-lg"></i>
+    </div>
+  </div>
+
+  <div class="px-4 pb-4">
+    <p class="text-sm text-gray-600">
+      Description: {{ topScoringTeam?.description }}
+    </p>
+    <p class="text-sm text-gray-500 mt-1">
+      Created on: {{ topScoringTeam?.creationDate | date:'longDate' }}
+    </p>
+  </div>
+</div>
+
+            <!-- charts    -->
+    
+        </div>
+        <!-- end charts -->
+    
+    
+    </div>
+        <!-- end Analytics -->
+    
+        <!-- Sales Overview -->
+        <div class="card mt-6">
+    
+        <!-- header -->
+        <div class="card-header flex flex-row justify-between">
+            <h1 class="h6">Overview</h1>
+    
+            <div class="flex flex-row justify-center items-center">
+    
+                <a href="">
+                    <i class="fad fa-chevron-double-down mr-6"></i>
+                </a>
+    
+                <a href="">
+                    <i class="fad fa-ellipsis-v"></i>
+                </a>
+    
+            </div>
+    
+        </div>
+        <!-- end header -->
+    
+       <!-- Event Interactions Card -->
+<div class="card-body p-6 bg-gradient-to-r from-indigo-600 via-purple-700 to-pink-600 rounded-xl shadow-2xl text-white font-sans space-y-6">
+
+  <!-- Header -->
+  <h2 class="text-3xl font-extrabold tracking-wide drop-shadow-lg text-center">
+    Event <span class="text-yellow-400">interactions</span>
+  </h2>
+
+  <!-- Filters Row: Category & Chart Type -->
+  <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+    <!-- Chart Type Selection -->
+    <div class="flex flex-col items-center">
+  <label for="chartType" class="text-lg font-semibold text-blue-800">Type de graphique :</label>
+  <select id="chartType" [(ngModel)]="chartType"
+    class="w-36 bg-white text-gray-900 rounded-lg px-4 py-2 shadow-md focus:outline-none focus:ring-4 focus:ring-yellow-400 transition">
+    <option value="bar">Barres</option>
+    <option value="pie">Camembert</option>
+  </select>
+</div>
+
+
+    <!-- Category Selection -->
+<div class="flex flex-col items-center">
+  <label for="category" class="text-lg font-semibold text-blue-800">Filtrer par catégorie :</label>
+  <select id="category" [(ngModel)]="selectedCategory" (change)="onCategoryChange()"
+    class="w-52 bg-white text-gray-900 rounded-lg px-4 py-2 shadow-md focus:outline-none focus:ring-4 focus:ring-yellow-400 transition">
+    <option value="">-- Toutes les catégories --</option>
+    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+  </select>
+</div>
+
+
+  <!-- Chart Area -->
+  <div class="flex justify-center items-center">
+    <!-- Bar Chart -->
+    <div *ngIf="chartType === 'bar'" class="w-full md:w-2/3 h-72">
+      <canvas baseChart
+        [data]="{
+          labels: chartLabels,
+          datasets: [{
+            data: chartData,
+            backgroundColor: ['#10b981', '#ef4444', '#3b82f6'],
+            borderRadius: 8,
+            borderWidth: 2,
+            borderColor: 'rgba(255, 255, 255, 0.5)'
+          }]
+        }"
+        [options]="{
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }"
+        [type]="'bar'"
+        class="w-full h-full drop-shadow-xl">
+      </canvas>
+    </div>
+
+    <!-- Pie Chart -->
+    <div *ngIf="chartType === 'pie'" class="w-48 h-48">
+      <canvas baseChart
+        [data]="{
+          labels: chartLabels,
+          datasets: [{
+            data: chartData,
+            backgroundColor: ['#10b981', '#ef4444', '#3b82f6'],
+            borderWidth: 2,
+            borderColor: 'rgba(255, 255, 255, 0.5)'
+          }]
+        }"
+        [options]="{
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } }
+        }"
+        [type]="'pie'"
+        class="w-full h-full drop-shadow-md">
+      </canvas>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+        
+        
+        <!-- end body -->
+    
+    </div>
+        <!-- end Sales Overview -->
+    
+        <!-- start numbers -->
+        <div class="grid grid-cols-2 gap-6 xl:grid-cols-2">
+    
+        <!-- card -->
+<div class="card mt-6 w-full max-w-md">
+  <div class="card-body flex items-center">
+    
+    <!-- Engagement Icon -->
+    <div class="px-3 py-2 rounded bg-yellow-500 text-white mr-3">
+      <i class="fas fa-fire"></i> <!-- fire icon to represent high engagement -->
+    </div>
+
+    <!-- Most Engaged User Info -->
+    <div class="flex flex-col">
+      <h1 class="font-semibold">Top Engagement</h1>
+      <div *ngIf="mostEngagedUser">
+        <p class="text-sm font-medium">
+          <span class="text-yellow-400">{{ mostEngagedUser.username }}</span> 
+          <span class="text-xs text-gray-600">(Score: {{ mostEngagedUser.score_u }})</span>
+        </p>
+      </div>
+      <div *ngIf="!mostEngagedUser">
+        <p class="text-sm text-gray-400">No data available</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end card -->
+
+        
+        
+    
+        <!-- card -->
+<div class="card mt-6 w-full max-w-md">
+  <div class="card-body flex items-center">
+    
+    <!-- Low Engagement Icon -->
+    <div class="px-3 py-2 rounded bg-red-600 text-white mr-3">
+      <i class="fas fa-arrow-down"></i> <!-- arrow down icon for low engagement -->
+    </div>
+
+    <!-- Least Engaged User Info -->
+    <div class="flex flex-col">
+      <h1 class="font-semibold">Low Engagement</h1>
+      <div *ngIf="leastEngagedUser">
+        <p class="text-sm font-medium">
+          <span class="text-red-400">{{ leastEngagedUser.username }} </span> 
+          <span class="text-xs text-gray-600">(Score: {{ leastEngagedUser.score_u }})</span>
+        </p>
+      </div>
+      <div *ngIf="!leastEngagedUser">
+        <p class="text-sm text-gray-400">No data available</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end card -->
+
+    
+    </div>
+        <!-- end nmbers -->
+    
+        <!-- start quick Info -->
+        <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
+    
+    
+        <!-- Browser Stats -->
+        <div class="card">
+            <div class="card-header">Legends</div>
+    
+           <!-- Engagement Ranking Card -->
+<div *ngIf="engagementRanking.length > 0" class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition-all hover:scale-[1.02] duration-300">
+  <!-- Card Header -->
+  <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-4 flex items-center">
+    <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm mr-4 shadow-inner">
+      <h5 class="text-4xl">🏆</h5>
+    </div>
+    <div>
+      <h1 class="text-xl font-bold text-black">Engagement Champions</h1>
+      <p class="text-gray-600 text-sm">Top active community members</p>
+    </div>
+  </div>
+
+  <!-- Ranking List -->
+  <div class="divide-y divide-gray-100/50">
+    <div *ngFor="let user of engagementRanking; let i = index" class="p-4 flex items-center hover:bg-gray-100/80 transition-colors duration-200">
+      <!-- Medal Badge -->
+      <div class="flex-shrink-0 mr-4 w-8 h-8 rounded-full flex items-center justify-center bg-blue-600 shadow-md" 
+           [ngClass]="{
+             'bg-gradient-to-br from-yellow-400 to-yellow-500 shadow-md': i === 0,
+             'bg-gradient-to-br from-gray-300 to-gray-400 shadow-md': i === 1,
+             'bg-gradient-to-br from-amber-600 to-amber-700 shadow-md': i === 2,
+             'bg-gray-100': i > 2
+           }">
+        <span class="font-bold text-white">{{ i + 1 }}</span>
+      </div>
+      
+      <!-- User Info -->
+      <div class="flex-1 min-w-0">
+        <div class="flex justify-between items-baseline">
+          <p class="font-semibold text-gray-800 truncate">{{ user.username }}</p>
+          <span class="text-xs font-medium px-2 py-1 rounded-full" 
+                [ngClass]="{
+                  'bg-blue-200 text-blue-800': i === 0,
+                  'bg-gray-100 text-gray-800': i > 0
+                }">
+            {{ user.score_u }} pts
+          </span>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="mt-2">
+          <div class="w-full bg-gray-200 rounded-full h-1.5">
+            <div class="bg-gradient-to-r from-blue-400 to-indigo-500 h-1.5 rounded-full" 
+                 [style.width.%]="(user.score_u / engagementRanking[0].score_u) * 100"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  
+</div>
+    
+        </div>
+        <!-- end Browser Stats -->
+    
+       <!-- Event Participants Table -->
+<div class="card col-span-2 xl:col-span-1 bg-white rounded-xl shadow-md overflow-hidden">
+  <div class="card-header bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-4 text-lg font-semibold">
+    Event Participants
+  </div>
+
+  <div *ngIf="error" class="p-4 text-red-500 bg-red-50 border-l-4 border-red-500 mx-4 my-2 rounded">
+    {{error}}
+  </div>
+
+  <table class="table-auto w-full text-left">
+    <thead>
+      <tr class="bg-gray-50 text-gray-700">
+        <th class="px-6 py-3 border-b border-gray-200 font-medium">Event</th>
+        <th class="px-6 py-3 border-b border-gray-200 font-medium">Participant Name</th>
+        <th class="px-6 py-3 border-b border-gray-200 font-medium">Email</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <ng-container *ngIf="!loading; else loadingTemplate">
+        <ng-container *ngFor="let item of eventParticipants">
+          <!-- First row shows event name -->
+          <tr *ngIf="item.users.length > 0" class="hover:bg-gray-50 transition-colors">                    
+            <td class="px-6 py-4 font-medium whitespace-nowrap" [attr.rowspan]="item.users.length">
+              <div class="flex items-center">
+                <i class="fas fa-plus-circle mr-3 text-indigo-500 text-sm cursor-pointer hover:text-indigo-700 transition-colors" 
+                   [title]="'Add user to event'"
+                   (click)="navigateToAddUser(item.event.eventId)"></i>
+                <span class="text-gray-800">{{item.event.eventName}}</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <span class="text-gray-800 font-medium">{{item.users[0].username}}</span> 
+            </td>
+            <td class="px-6 py-4">
+              <span class="text-gray-600">{{item.users[0].email}}</span>
+            </td>
+          </tr>
+          
+          <!-- Subsequent rows for additional users -->
+          <tr *ngFor="let user of item.users.slice(1)" class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4">
+              <span class="text-gray-800 font-medium">{{user.username}}</span> 
+            </td>
+            <td class="px-6 py-4">
+              <span class="text-gray-600">{{user.email}}</span>
+            </td>
+          </tr>
+
+          <!-- Case when no participants -->
+          <tr *ngIf="item.users.length === 0" class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4">
+              <div class="flex items-center">
+                <i class="fas fa-plus-circle mr-3 text-indigo-500 text-sm cursor-pointer hover:text-indigo-700 transition-colors" 
+                   [title]="'Add user to this event'"
+                   (click)="navigateToAddUser(item.event.eventId)"></i>
+                <span class="text-gray-800">{{item.event.eventName}}</span>
+              </div>
+            </td>
+            <td class="px-6 py-4 text-gray-400 italic" colspan="2">
+              No participants yet
+            </td>
+          </tr>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #loadingTemplate>
+        <tr>
+          <td colspan="3" class="px-6 py-8 text-center">
+            <div class="flex justify-center items-center">
+              <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-500"></div>
+              <span class="ml-3 text-gray-600">Loading participants...</span>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>
+         <!-- End Recent Sales -->
+        </div>
+        <!-- end quick Info -->         
+      </div> 
+      <!-- end content -->
+    </div>
+
+    

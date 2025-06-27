@@ -1,0 +1,160 @@
+<body class="index-page bg-gradient-to-br from-indigo-100 to-teal-100 min-h-screen">
+    <!-- Header -->
+    <header id="header" class="header fixed-top shadow-lg bg-gray-800 bg-opacity-95 backdrop-blur-sm">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename text-2xl font-extrabold text-indigo-400 tracking-wide">TeamQuest</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul class="flex space-x-0">
+          <li><a routerLink="/home" class="nav-link text-gray-200 hover:text-teal-400 transition duration-300 font-medium cursor-pointer">Home</a></li>
+          <li><a routerLink="/home">Service</a></li>
+          <li><a routerLink="/games" class="nav-link text-gray-200 hover:text-teal-400 transition duration-300 font-medium">Games</a></li>
+          <li><a routerLink="/rank" class="nav-link text-gray-200 hover:text-teal-400 transition duration-300 font-medium">Classement</a></li>
+          <li><a routerLink="/home" class="nav-link text-gray-200 hover:text-teal-400 transition duration-300 font-medium">Portfolio</a></li>
+          <li class="dropdown">
+              <a href="#" (click)="scrollTo('services', $event)"><span>Team</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a routerLink="/myteam">My Team</a></li>
+                <li><a routerLink="/jointeam">All Teams</a></li>
+                <li><a routerLink="/teamcreation">Create Team</a></li>
+              </ul>
+            </li>
+          <li class="dropdown"><a href="#" (click)="scrollTo('services', $event)"><span>Upcoming Event</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a routerLink="/allevents">All events</a></li>
+                <li class="dropdown">
+  <a href="#"><span>Select event category</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+  <ul>
+    <li><a (click)="navigateToCategory('SPORTS')">Sport</a></li>
+    <li><a (click)="navigateToCategory('PARTY')">Party</a></li>
+    <li><a (click)="navigateToCategory('CAMPING')">Camping</a></li>
+    <li><a (click)="navigateToCategory('CULTURAL')">Culture</a></li>
+  </ul>
+</li>
+                <!-- <li><a href="#">Dropdown 2</a></li> -->
+              </ul>
+            </li>
+          <li><a routerLink="/home" class="nav-link text-gray-200 hover:text-teal-400 transition duration-300 font-medium">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list text-gray-200 cursor-pointer"></i>
+      </nav>
+    </div>
+  </header>
+     
+    <div>..................</div>
+    <div>..................</div>
+<div class="quiz-container">
+  <h2 class="title">🚀 Take on the Quiz Challenge!</h2>
+
+  <!-- Removed manual selection, just shows the chosen level -->
+<div *ngIf="selectedDifficultyLabel" class="info">
+  <p>Selected Difficulty: <strong>{{ selectedDifficultyLabel }}</strong></p>
+</div>
+
+<button (click)="onGenerateQuestions()" [disabled]="isLoading" class="generate-btn">
+  <span class="center-text" *ngIf="!isLoading">
+  <span class="white-dots">.......................................</span> 🎯 Generate Questions
+</span>
+  <span *ngIf="isLoading" class="loading-spinner"></span>
+</button>
+
+
+  <div *ngIf="isLoading" class="loading">⏳ Loading your quiz...</div>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+ <div *ngIf="questions.length > 0" class="questions-section">
+  <h3 class="section-title">📝 Answer the following questions:</h3>
+
+  <div *ngFor="let question of questions; let i = index" class="question-card">
+    <p class="question-text">{{ question.questionText }}</p>
+
+    <ul class="options-list">
+      <li *ngFor="let option of [question.option1, question.option2, question.option3]">
+        <label class="option-label">
+          <input
+            type="radio"
+            [name]="'q' + i"
+            [value]="option"
+            (change)="selectAnswer(i, option)"
+            [checked]="userAnswers[i] === option"
+            class="option-input"
+          />
+          {{ option }}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <button (click)="submitAnswers()" class="btn-submit">Submit Your Answers</button>
+</div>
+
+</div>
+<!-- Footer -->
+<footer id="footer" class="footer dark-background">
+    
+    <div class="container footer-top">
+    <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Dewi</span>
+        </a>
+        <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+        </div>
+        <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+        </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Useful Links</h4>
+        <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+        </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Our Services</h4>
+        <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+        </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+        <h4>Our Newsletter</h4>
+        <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+        <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+        </form>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+    <p>© <span>Copyright</span> <strong class="px-1 sitename">Dewi</strong> <span>All Rights Reserved</span></p>
+    <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+    </div>
+    </div>
+
+</footer>
