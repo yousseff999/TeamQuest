@@ -1,0 +1,55 @@
+pipeline {
+  agent any
+
+  environment {
+    DOCKER_COMPOSE_DIR = 'TeamQuest-master'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git url: 'https://github.com/yousseff999/TeamQuest.git', 
+            branch: 'master',
+            credentialsId: 'pfe'
+      }
+    }
+
+    stage('Build Backend Jar') {
+      steps {
+        dir("${DOCKER_COMPOSE_DIR}") {
+          sh 'mvn clean package -DskipTests'
+        }
+      }
+    }
+
+    stage('Build Backend Docker Image') {
+      steps {
+        dir("${DOCKER_COMPOSE_DIR}") {
+          sh 'docker build -t teamquest-backend .'
+        }
+      }
+    }
+
+    stage('Build Frontend Docker Image') {
+      steps {
+        dir('TeamQuestAng-main') {
+          sh 'docker build -t teamquest-frontend .'
+        }
+      }
+    }
+
+    stage('Deploy with Docker Compose') {
+      steps {
+        dir("${DOCKER_COMPOSE_DIR}") {
+          sh '/usr/local/bin/docker-compose up --build -d'
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      echo 'Pipeline finished.'
+    }
+  }
+}
