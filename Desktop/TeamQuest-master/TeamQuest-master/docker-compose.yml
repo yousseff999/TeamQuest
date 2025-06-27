@@ -50,7 +50,7 @@ services:
     image: adminer
     restart: unless-stopped
     ports:
-      - "8083:8083"  # Access Adminer UI at http://localhost:8080 or http://192.168.56.10:8080
+      - "8083:8080"  # Access Adminer UI at http://localhost:8080 or http://192.168.56.10:8080
     networks:
       - app-network
 
