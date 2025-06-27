@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ActivityService {
-  private apiUrl = `${environment.apiBaseUrl}/api/activity`;
+  private apiUrl = `${environment.apiBaseUrl}/Activity`;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
