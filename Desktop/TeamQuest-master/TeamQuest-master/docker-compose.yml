@@ -19,7 +19,7 @@ services:
     depends_on:
       - mysqldb
     build:
-      context: ./backend
+      context: .
     restart: on-failure
     ports:
       - "8086:8086"
@@ -38,11 +38,9 @@ services:
       - app-network
 
   frontend:
+    image: teamquest-frontend
     depends_on:
       - backend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
     ports:
       - "4200:80"
     networks:

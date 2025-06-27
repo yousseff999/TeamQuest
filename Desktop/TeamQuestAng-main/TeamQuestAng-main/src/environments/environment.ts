@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://backend:8086/api' // Docker Compose backend service name
+  apiUrl: 'http://192.168.56.10:8086/api/auth'
 };
