@@ -5,6 +5,7 @@ import { Team } from '../models/team';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
 import { Rank } from '../models/rank';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
