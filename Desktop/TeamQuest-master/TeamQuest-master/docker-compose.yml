@@ -7,9 +7,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: youssef
       MYSQL_DATABASE: TeamQuest
-      # Remove MYSQL_ALLOW_EMPTY_PASSWORD if you keep root password
     ports:
-      - "3307:3306"
+      - "3307:3306"   # Map to 3307 on host to avoid conflict with XAMPP MySQL on 3306
     volumes:
       - db:/var/lib/mysql
     networks:
@@ -42,7 +41,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "4200:80"
+      - "4200:80"   # Angular frontend on port 4200 - no conflict with XAMPP Apache on 8081
     networks:
       - app-network
 
@@ -50,7 +49,7 @@ services:
     image: adminer
     restart: unless-stopped
     ports:
-      - "8083:8080"  # Access Adminer UI at http://localhost:8080 or http://192.168.56.10:8080
+      - "8083:8080"   # Adminer UI on 8083 - should be free
     networks:
       - app-network
 
