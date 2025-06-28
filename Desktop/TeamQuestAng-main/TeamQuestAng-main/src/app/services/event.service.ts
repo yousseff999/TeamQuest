@@ -9,7 +9,7 @@ import { Event as MyEvent } from 'src/app/models/event';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class EventService {
 
