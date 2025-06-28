@@ -6,12 +6,14 @@ import { EventInteraction } from '../models/event-interaction';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
 import { Event as MyEvent } from 'src/app/models/event';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:8086/Event';
+
+  private apiUrl = `${environment.apiBaseUrl}/Event`;
   private nominatimUrl = 'https://nominatim.openstreetmap.org/search';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
