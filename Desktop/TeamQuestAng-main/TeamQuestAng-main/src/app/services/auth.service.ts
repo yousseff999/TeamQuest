@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8086/api/auth; // Uses the correct backend URL
-
+  //private apiUrl = 'http://localhost:8086/api/auth; // Uses the correct backend URL
+private apiUrl = `${environment.apiBaseUrl}/api/auth;`
   constructor(private http: HttpClient, private router: Router) {}
 
   // Forgot Password
