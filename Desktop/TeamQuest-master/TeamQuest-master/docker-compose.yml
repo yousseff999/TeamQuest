@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mysqldb:
-    image: mysql:5.7
+    image: mysql:8
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=SOPRA
@@ -29,7 +29,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ""
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8InnoDBDialect
       SERVER_PORT: 8086
     stdin_open: true
     tty: true
