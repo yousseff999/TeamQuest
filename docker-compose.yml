@@ -2,14 +2,14 @@ version: "3.8"
 
 services:
   mysqldb:
-    image: mysql:5.6
+    image: mysql:5.7
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=youssef
+      #- MYSQL_ROOT_PASSWORD=youssef
       - MYSQL_DATABASE=TeamQuest
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
-      - "3307:3306"  # Changed the host port to 3307 to avoid conflict
+      - "3306:3306"  # Changed the host port to 3307 to avoid conflict
     volumes:
       - db:/var/lib/mysql
 
@@ -24,8 +24,8 @@ services:
       SPRING_APPLICATION_JSON: '{
         "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/TeamQuest?useSSL=false",
         "spring.datasource.username" : "root",
-        "spring.datasource.password" : "youssef",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect",
+        "spring.datasource.password" : "",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
     # Removed the .m2 volume mount to avoid errors related to non-existent bind mount
