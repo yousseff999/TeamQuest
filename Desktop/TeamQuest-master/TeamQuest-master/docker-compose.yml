@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mysqldb:
-    image: mysql:8
+    image: mysql:5.7
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=SOPRA
@@ -11,11 +11,8 @@ services:
       - "3306:3306"
     volumes:
       - db:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    networks:
+      - backend
 
   app:
     depends_on:
@@ -29,10 +26,16 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ""
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
       SERVER_PORT: 8086
+    networks:
+      - backend
     stdin_open: true
     tty: true
 
 volumes:
   db:
+
+networks:
+  backend:
+    driver: bridge
