@@ -33,7 +33,7 @@ services:
       - backend
     stdin_open: true
     tty: true
- frontend:
+  frontend:
     depends_on:
      - app
     build:
