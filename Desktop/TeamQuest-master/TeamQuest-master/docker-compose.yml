@@ -35,7 +35,7 @@ services:
     tty: true
   frontend:
     build:
-      context: ./Desktop/TeamQuestAng-main/TeamQuestAng-main
+      context: /var/lib/jenkins/workspace/TeamQuest/Desktop/TeamQuestAng-main/TeamQuestAng-main
       dockerfile: Dockerfile
     image: teamquest-frontend
     ports:
