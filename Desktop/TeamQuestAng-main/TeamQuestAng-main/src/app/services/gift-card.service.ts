@@ -7,7 +7,7 @@ import { GiftCard, ExchangeRequest } from '../models/gift-card';
   providedIn: 'root'
 })
 export class GiftCardService {
-  private apiUrl = 'http://localhost:8086/api/gift-cards';
+  private apiUrl = 'http://192.168.56.10:8086/api/gift-cards';
 
   constructor(private http: HttpClient) {}
 
