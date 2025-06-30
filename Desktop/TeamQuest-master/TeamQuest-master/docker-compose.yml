@@ -33,7 +33,19 @@ services:
       - backend
     stdin_open: true
     tty: true
-
+ frontend:
+    depends_on:
+     - app
+    build:
+      context: ./Desktop/TeamQuestAng-main/TeamQuestAng-main
+      dockerfile: Dockerfile
+    image: teamquest-frontend
+    ports:
+      - "4200:80"
+    networks:
+      - backend
+    depends_on:
+      - app
 volumes:
   db:
 
