@@ -34,8 +34,6 @@ services:
     stdin_open: true
     tty: true
   frontend:
-    depends_on:
-     - app
     build:
       context: ./Desktop/TeamQuestAng-main/TeamQuestAng-main
       dockerfile: Dockerfile
